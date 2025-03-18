@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, Calendar 
 } from 'lucide-react';
@@ -9,6 +9,7 @@ import WellnessCard from '@/components/WellnessCard';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
+  const navigate = useNavigate();
   
   return (
     <div className="page-container">
@@ -56,33 +57,39 @@ const Home = () => {
             title="Track Your Mood"
             backgroundColor="bg-mood-purple"
             badge="Daily"
+            to="/mood"
           />
           <WellnessCard
             icon={Cloud}
             title="Calming Room"
             backgroundColor="bg-mood-peach"
+            to="/calming-room"
           />
           <WellnessCard
             icon={BookOpen}
             title="Journal Entry"
             backgroundColor="bg-mood-green"
             badge="New"
+            to="/journal"
           />
           <WellnessCard
             icon={MessageSquare}
             title="Talk to AI"
             backgroundColor="bg-mood-pink"
+            to="/ai-chat"
           />
           <WellnessCard
             icon={Wind}
             title="Breathing Exercise"
             backgroundColor="bg-mood-peach"
+            to="/breathing"
           />
           <WellnessCard
             icon={Heart}
             title="Habit Tracker"
             backgroundColor="bg-white"
             badge="Plant Trees"
+            to="/habits"
           />
         </div>
       ) : (
@@ -91,17 +98,20 @@ const Home = () => {
             icon={UserCircle}
             title="Therapist Directory"
             backgroundColor="bg-mood-purple"
+            to="/therapists"
           />
           <WellnessCard
             icon={Calendar}
             title="Book Appointment"
             backgroundColor="bg-mood-peach"
+            to="/appointment"
           />
           <WellnessCard
             icon={MessageSquare}
             title="Secure Chat"
             backgroundColor="bg-mood-green"
             badge="Private"
+            to="/secure-chat"
           />
         </div>
       )}

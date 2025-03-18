@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface WellnessCardProps {
   icon: LucideIcon;
@@ -10,6 +11,7 @@ interface WellnessCardProps {
   badge?: string;
   onClick?: () => void;
   className?: string;
+  to?: string;
 }
 
 const WellnessCard: React.FC<WellnessCardProps> = ({
@@ -19,15 +21,26 @@ const WellnessCard: React.FC<WellnessCardProps> = ({
   badge,
   onClick,
   className,
+  to,
 }) => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    if (to) {
+      navigate(to);
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <div
       className={cn(
-        "relative wellness-card",
+        "relative wellness-card cursor-pointer",
         backgroundColor,
         className
       )}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <div className="flex items-center">
         <div className="mr-4 text-icon-purple">
