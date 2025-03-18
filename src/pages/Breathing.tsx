@@ -25,9 +25,17 @@ const Breathing = () => {
     
     return () => clearInterval(timer);
   }, [counter, phase, isActive]);
+
+  const getInstructions = () => {
+    switch(phase) {
+      case 'inhale': return 'Breathe in slowly';
+      case 'hold': return 'Hold your breath';
+      case 'exhale': return 'Breathe out slowly';
+    }
+  };
   
   return (
-    <div className="page-container">
+    <div className="page-container bg-gray-50">
       <div className="flex items-center mb-6">
         <Link to="/" className="mr-4">
           <ArrowLeft size={20} />
@@ -35,26 +43,37 @@ const Breathing = () => {
         <h1 className="text-2xl font-semibold">Breathing Exercise</h1>
       </div>
       
-      <div className="flex flex-col items-center justify-center mt-20">
-        <div 
-          className={`w-64 h-64 rounded-full bg-mood-purple flex items-center justify-center text-white text-2xl transition-all duration-1000 ${
-            phase === 'inhale' ? 'scale-90' : 
-            phase === 'hold' ? 'scale-100' : 'scale-110'
-          }`}
-        >
-          {phase}
+      <div className="flex flex-col items-center justify-center mt-16">
+        <div className="text-center mb-6">
+          <p className="text-gray-600">{getInstructions()}</p>
         </div>
         
-        <div className="mt-8 text-xl font-semibold">
-          {counter}
+        <div 
+          className={`w-64 h-64 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-1000 ${
+            phase === 'inhale' ? 'bg-blue-400 scale-90' : 
+            phase === 'hold' ? 'bg-purple-400 scale-100' : 'bg-teal-400 scale-110'
+          }`}
+        >
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-light mb-2">{counter}</span>
+            <span className="text-lg capitalize">{phase}</span>
+          </div>
         </div>
         
         <button 
-          className="mt-12 bg-mood-purple text-white px-6 py-2 rounded-full"
+          className="mt-16 bg-icon-purple text-white px-8 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all"
           onClick={() => setIsActive(prev => !prev)}
         >
           {isActive ? 'Pause' : 'Resume'}
         </button>
+        
+        <div className="mt-12 text-center text-gray-500">
+          <h3 className="font-medium mb-2">Benefits</h3>
+          <p className="text-sm">
+            Deep breathing helps reduce stress, lower blood pressure, 
+            and promote feelings of calm and relaxation.
+          </p>
+        </div>
       </div>
     </div>
   );
