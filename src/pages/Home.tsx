@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle 
+  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, Calendar 
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
