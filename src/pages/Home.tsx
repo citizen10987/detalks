@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, Calendar 
+  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, Calendar, TreeDeciduous 
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
@@ -68,6 +68,13 @@ const Home = () => {
             to="/mood"
           />
           <WellnessCard
+            icon={TreeDeciduous}
+            title="Habit Tracker"
+            backgroundColor="bg-mood-green"
+            badge="Plant Trees"
+            to="/habits"
+          />
+          <WellnessCard
             icon={Cloud}
             title="Calming Room"
             backgroundColor="bg-mood-peach"
@@ -91,13 +98,6 @@ const Home = () => {
             title="Breathing Exercise"
             backgroundColor="bg-mood-peach"
             to="/breathing"
-          />
-          <WellnessCard
-            icon={Heart}
-            title="Habit Tracker"
-            backgroundColor="bg-white"
-            badge="Plant Trees"
-            to="/habits"
           />
         </div>
       ) : (
