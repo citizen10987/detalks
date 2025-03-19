@@ -13,14 +13,22 @@ const Home = () => {
   
   return (
     <div className="page-container">
+      <div className="welcome-image-container mb-6 -mx-4 overflow-hidden rounded-b-3xl">
+        <img 
+          src="/lovable-uploads/dda6774c-f893-477e-960b-4a0435b7e4f6.png" 
+          alt="Peaceful night view" 
+          className="w-full h-auto object-cover animate-fade-in" 
+        />
+      </div>
+      
       <div className="page-header">
         <div>
           <h1 className="text-2xl font-semibold">Welcome back, Sarah</h1>
-          <p className="text-gray-600">How are you feeling today?</p>
+          <p className="text-gray-600 dark:text-gray-400">How are you feeling today?</p>
         </div>
         <Link to="/profile">
-          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-            <UserCircle className="text-gray-500" size={20} />
+          <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+            <UserCircle className="text-gray-500 dark:text-gray-400" size={20} />
           </div>
         </Link>
       </div>
@@ -31,8 +39,8 @@ const Home = () => {
         <button
           className={`flex-1 py-3 px-4 rounded-xl transition-all ${
             activeTab === 'self-guided'
-              ? 'bg-black text-white'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-black text-white dark:bg-gray-700'
+              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
           }`}
           onClick={() => setActiveTab('self-guided')}
         >
@@ -41,8 +49,8 @@ const Home = () => {
         <button
           className={`flex-1 py-3 px-4 rounded-xl transition-all ${
             activeTab === 'professional'
-              ? 'bg-black text-white'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-black text-white dark:bg-gray-700'
+              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
           }`}
           onClick={() => setActiveTab('professional')}
         >
