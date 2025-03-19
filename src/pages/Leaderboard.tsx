@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Trophy, Medal, Star, Filter } from 'lucide-react';
+import { ArrowLeft, Trophy, Medal, Star, Filter, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface LeaderboardEntry {
