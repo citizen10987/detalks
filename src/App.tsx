@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
 import Professional from "@/pages/Professional";
+import Stats from "@/pages/Stats";
+import Leaderboard from "@/pages/Leaderboard";
 import Journal from "@/pages/Journal";
 import Mood from "@/pages/Mood";
 import Profile from "@/pages/Profile";
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/professional" element={<Professional />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/mood" element={<Mood />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/calming-room" element={<CalmingRoom />} />
           <Route path="/breathing" element={<Breathing />} />

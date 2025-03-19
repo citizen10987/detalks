@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Moon, User } from 'lucide-react';
+import { Home, BarChart, Trophy, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -15,14 +15,14 @@ const Navbar = () => {
       icon: Home
     },
     {
-      name: 'Journal',
-      path: '/journal',
-      icon: BookOpen
+      name: 'Stats',
+      path: '/stats',
+      icon: BarChart
     },
     {
-      name: 'Mood',
-      path: '/mood',
-      icon: Moon
+      name: 'Leaderboard',
+      path: '/leaderboard',
+      icon: Trophy
     },
     {
       name: 'Profile',
