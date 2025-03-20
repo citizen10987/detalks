@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar as CalendarIcon, Clock, User, MapPin, Video, Phone, CalendarCheck, Badge } from 'lucide-react';
+import { ArrowLeft, Calendar as CalendarIcon, Clock, User, MapPin, Video, Phone, CalendarCheck, Badge, Shield } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
@@ -126,81 +126,87 @@ const Appointment = () => {
         </Card>
       )}
       
-      <div className="mb-6 animate-fade-in">
-        <h2 className="text-lg font-medium mb-3 flex items-center">
-          <CalendarCheck size={18} className="mr-2 text-icon-purple dark:text-icon-purple-light" />
-          Appointment Type
-        </h2>
-        <Tabs defaultValue="video" className="w-full" onValueChange={(value) => setAppointmentType(value as any)}>
-          <TabsList className="grid grid-cols-3 w-full bg-gray-100 dark:bg-gray-800">
-            <TabsTrigger value="video" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-              <Video size={16} className="mb-1" />
-              <span className="text-xs">Video</span>
-            </TabsTrigger>
-            <TabsTrigger value="phone" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-              <Phone size={16} className="mb-1" />
-              <span className="text-xs">Phone</span>
-            </TabsTrigger>
-            <TabsTrigger value="in-person" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-              <MapPin size={16} className="mb-1" />
-              <span className="text-xs">In-person</span>
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </div>
+      <Card className="mb-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 animate-fade-in">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-medium flex items-center">
+            <CalendarCheck size={18} className="mr-2 text-icon-purple dark:text-icon-purple-light" />
+            Appointment Type
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="video" className="w-full" onValueChange={(value) => setAppointmentType(value as any)}>
+            <TabsList className="grid grid-cols-3 w-full bg-gray-100 dark:bg-gray-800">
+              <TabsTrigger value="video" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
+                <Video size={16} className="mb-1" />
+                <span className="text-xs">Video</span>
+              </TabsTrigger>
+              <TabsTrigger value="phone" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
+                <Phone size={16} className="mb-1" />
+                <span className="text-xs">Phone</span>
+              </TabsTrigger>
+              <TabsTrigger value="in-person" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
+                <MapPin size={16} className="mb-1" />
+                <span className="text-xs">In-person</span>
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </CardContent>
+      </Card>
       
-      <div className="mb-6 animate-fade-in">
-        <div className="flex justify-between items-center mb-3">
-          <h2 className="text-lg font-medium flex items-center">
+      <Card className="mb-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 animate-fade-in">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-medium flex items-center">
             <CalendarIcon size={18} className="mr-2 text-icon-purple dark:text-icon-purple-light" />
             Select Date
-          </h2>
-        </div>
-        
-        <div className="flex overflow-x-auto pb-2 -mx-2 px-2 space-x-2 scrollbar-none">
-          {getAvailableDates().map((date) => (
-            <button
-              key={date.date}
-              className={cn(
-                "flex-shrink-0 flex flex-col items-center rounded-xl px-4 py-3 transition-all transform",
-                selectedDate === date.date
-                  ? "bg-icon-purple text-white dark:bg-icon-purple-light dark:text-gray-900 scale-105"
-                  : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
-              )}
-              onClick={() => setSelectedDate(date.date)}
-            >
-              <span className="text-xs font-medium">{date.dayName.slice(0, 3)}</span>
-              <span className="text-lg font-semibold">{date.displayDate.split(',')[1]}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex overflow-x-auto pb-2 -mx-2 px-2 space-x-2 scrollbar-none">
+            {getAvailableDates().map((date) => (
+              <button
+                key={date.date}
+                className={cn(
+                  "flex-shrink-0 flex flex-col items-center rounded-xl px-4 py-3 transition-all transform",
+                  selectedDate === date.date
+                    ? "bg-icon-purple text-white dark:bg-icon-purple-light dark:text-gray-900 scale-105"
+                    : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                )}
+                onClick={() => setSelectedDate(date.date)}
+              >
+                <span className="text-xs font-medium">{date.dayName.slice(0, 3)}</span>
+                <span className="text-lg font-semibold">{date.displayDate.split(',')[1]}</span>
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
       
-      <div className="mb-8 animate-fade-in">
-        <div className="flex justify-between items-center mb-3">
-          <h2 className="text-lg font-medium flex items-center">
+      <Card className="mb-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 animate-fade-in">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-medium flex items-center">
             <Clock size={18} className="mr-2 text-icon-purple dark:text-icon-purple-light" />
             Select Time
-          </h2>
-        </div>
-        
-        <div className="grid grid-cols-3 gap-2">
-          {getTimeSlots().map((time) => (
-            <button
-              key={time}
-              className={cn(
-                "py-3 rounded-xl transition-all text-sm",
-                selectedTime === time
-                  ? "bg-icon-purple text-white dark:bg-icon-purple-light dark:text-gray-900 transform scale-105"
-                  : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
-              )}
-              onClick={() => setSelectedTime(time)}
-            >
-              {time}
-            </button>
-          ))}
-        </div>
-      </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-3 gap-2">
+            {getTimeSlots().map((time) => (
+              <button
+                key={time}
+                className={cn(
+                  "py-3 rounded-xl transition-all text-sm",
+                  selectedTime === time
+                    ? "bg-icon-purple text-white dark:bg-icon-purple-light dark:text-gray-900 transform scale-105"
+                    : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                )}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
       
       <div className="fixed bottom-20 left-0 right-0 px-4 pb-4 bg-gradient-to-t from-background via-background to-transparent pt-6">
         <Button 

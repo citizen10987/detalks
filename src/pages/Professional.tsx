@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, UserCircle, Calendar, MessageSquare, Badge } from 'lucide-react';
+import { ArrowLeft, UserCircle, Calendar, MessageSquare, BookOpen } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
@@ -67,7 +67,7 @@ const Professional = () => {
           to="/secure-chat"
         />
         <WellnessCard
-          icon={Badge}
+          icon={BookOpen}
           title="Mental Health Resources"
           backgroundColor="bg-mood-blue dark:bg-blue-900/60"
           to="/resources"

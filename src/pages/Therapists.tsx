@@ -22,7 +22,7 @@ interface Therapist {
 
 const Therapists = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSpecialty, setSelectedSpecialty] = useState('');
+  const [selectedSpecialty, setSelectedSpecialty] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   
   const therapists: Therapist[] = [
@@ -125,7 +125,7 @@ const Therapists = () => {
               <SelectValue placeholder="All Specialties" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Specialties</SelectItem>
+              <SelectItem value="all">All Specialties</SelectItem>
               {specialties.map(specialty => (
                 <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
               ))}
