@@ -51,10 +51,10 @@ const Leaderboard = () => {
 
   return (
     <div className="page-container pb-20">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 mt-4">
         <div className="flex items-center">
           <button 
-            className="mr-2 bg-transparent"
+            className="mr-2 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full transition-colors"
             onClick={() => navigate('/')}
           >
             <ArrowLeft size={22} className="text-gray-600 dark:text-gray-400" />
@@ -63,7 +63,7 @@ const Leaderboard = () => {
         </div>
         <div className="relative">
           <button 
-            className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full flex items-center space-x-1"
+            className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full flex items-center space-x-1 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             onClick={() => {}}
           >
             <Filter size={18} className="text-gray-600 dark:text-gray-400" />
@@ -75,7 +75,7 @@ const Leaderboard = () => {
         <button
           className={`flex-1 py-2 px-4 rounded-xl transition-all ${
             filter === 'streak'
-              ? 'bg-black text-white dark:bg-gray-700'
+              ? 'bg-icon-purple text-white dark:bg-icon-purple-light dark:text-black'
               : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
           }`}
           onClick={() => setFilter('streak')}
@@ -85,7 +85,7 @@ const Leaderboard = () => {
         <button
           className={`flex-1 py-2 px-4 rounded-xl transition-all ${
             filter === 'trees'
-              ? 'bg-black text-white dark:bg-gray-700'
+              ? 'bg-icon-purple text-white dark:bg-icon-purple-light dark:text-black'
               : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
           }`}
           onClick={() => setFilter('trees')}
@@ -95,7 +95,7 @@ const Leaderboard = () => {
         <button
           className={`flex-1 py-2 px-4 rounded-xl transition-all ${
             filter === 'habits'
-              ? 'bg-black text-white dark:bg-gray-700'
+              ? 'bg-icon-purple text-white dark:bg-icon-purple-light dark:text-black'
               : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
           }`}
           onClick={() => setFilter('habits')}
@@ -114,20 +114,20 @@ const Leaderboard = () => {
           const podiumHeight = position === 1 ? 'h-32' : position === 2 ? 'h-24' : 'h-16';
           const avatarSize = position === 1 ? 'text-4xl' : 'text-3xl';
           const medalIcon = position === 1 ? 
-            <Trophy size={24} className="text-yellow-500" /> : 
+            <Trophy size={24} className="text-yellow-500 animate-float" /> : 
             position === 2 ? 
-              <Medal size={20} className="text-gray-400" /> : 
-              <Medal size={18} className="text-amber-700" />;
+              <Medal size={20} className="text-gray-400 animate-float" /> : 
+              <Medal size={18} className="text-amber-700 animate-float" />;
           
           return (
             <div key={user.id} className="flex flex-col items-center">
               <div className={`${avatarSize} mb-2 relative`}>
-                <span>{user.avatar}</span>
+                <span className="animate-soft-bounce">{user.avatar}</span>
                 <div className="absolute -top-2 -right-2">
                   {medalIcon}
                 </div>
               </div>
-              <p className={`text-sm font-medium ${user.isCurrentUser ? 'text-icon-purple font-bold' : ''}`}>
+              <p className={`text-sm font-medium ${user.isCurrentUser ? 'text-icon-purple dark:text-icon-purple-light font-bold' : ''}`}>
                 {user.name}
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -135,7 +135,7 @@ const Leaderboard = () => {
                  filter === 'trees' ? `${user.trees} 🌳` : 
                  `${user.habitCount} habits`}
               </p>
-              <div className={`${podiumHeight} w-20 bg-gradient-to-t from-mood-purple to-mood-pink rounded-t-lg mt-2 flex items-center justify-center text-white font-bold text-xl`}>
+              <div className={`${podiumHeight} w-20 bg-gradient-to-t from-mood-purple to-icon-purple dark:from-icon-purple-light dark:to-icon-purple rounded-t-lg mt-2 flex items-center justify-center text-white dark:text-black font-bold text-xl animate-breathe`}>
                 {position}
               </div>
             </div>
@@ -148,25 +148,25 @@ const Leaderboard = () => {
         {sortedData.slice(3).map((user, index) => (
           <div 
             key={user.id} 
-            className={`bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${
-              user.isCurrentUser ? 'border-2 border-icon-purple' : ''
+            className={`bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm hover:translate-y-[-2px] transition-all ${
+              user.isCurrentUser ? 'border-2 border-icon-purple dark:border-icon-purple-light' : ''
             }`}
           >
-            <div className="w-8 text-center font-medium text-gray-500">
+            <div className="w-8 text-center font-medium text-gray-500 dark:text-gray-400">
               {index + 4}
             </div>
             <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xl mr-3">
               {user.avatar}
             </div>
             <div className="flex-1">
-              <p className={`font-medium ${user.isCurrentUser ? 'text-icon-purple' : ''}`}>
+              <p className={`font-medium ${user.isCurrentUser ? 'text-icon-purple dark:text-icon-purple-light' : ''}`}>
                 {user.name} {user.isCurrentUser && '(You)'}
               </p>
             </div>
             <div className="flex items-center gap-1 font-medium">
               {filter === 'streak' ? (
                 <>
-                  <Calendar size={16} className="text-icon-purple" />
+                  <Calendar size={16} className="text-icon-purple dark:text-icon-purple-light" />
                   <span>{user.streak} days</span>
                 </>
               ) : filter === 'trees' ? (
@@ -176,7 +176,7 @@ const Leaderboard = () => {
                 </>
               ) : (
                 <>
-                  <Star size={16} className="text-icon-purple" />
+                  <Star size={16} className="text-icon-purple dark:text-icon-purple-light" />
                   <span>{user.habitCount}</span>
                 </>
               )}

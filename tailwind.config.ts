@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -64,14 +63,16 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         
-        // App specific colors
-        "mood-purple": "#F2EEFF",
-        "mood-peach": "#FFF5EA",
+        // App specific colors - refined for a more calming palette
+        "mood-purple": "#E5DEFF",
+        "mood-peach": "#FDE1D3",
         "mood-green": "#F0F7EA",
-        "mood-pink": "#FFE9E9",
-        "mood-blue": "#EAF5FF",
+        "mood-pink": "#FFDEE2",
+        "mood-blue": "#D3E4FD",
         "wellness-orange": "#F8B75D",
         "icon-purple": "#8362F2",
+        "icon-purple-light": "#A992F9",
+        "soft-gray": "#F1F0FB",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -109,6 +110,18 @@ export default {
             transform: "scale(1.05)" 
           },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        "breathe": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.03)" },
+        },
+        "soft-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-3px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +130,9 @@ export default {
         "scale-in": "scale-in 0.2s ease-out",
         "slide-in": "slide-in 0.3s ease-out",
         "pulse-slow": "pulse 3s ease-in-out infinite",
+        "float": "float 3s ease-in-out infinite",
+        "breathe": "breathe 4s ease-in-out infinite",
+        "soft-bounce": "soft-bounce 2s ease-in-out infinite",
       },
       transitionProperty: {
         'height': 'height',
@@ -124,6 +140,9 @@ export default {
       },
       transitionDuration: {
         '400': '400ms',
+      },
+      fontFamily: {
+        'sans': ['Outfit', 'system-ui', 'sans-serif'],
       },
     },
   },

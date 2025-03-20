@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -38,13 +39,13 @@
   }
 
   .dark {
-    --background: 222 10% 5%;
+    --background: 222 20% 6%;
     --foreground: 210 40% 98%;
 
-    --card: 222 10% 10%;
+    --card: 222 20% 9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 10% 5%;
+    --popover: 222 20% 6%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 142 76% 36%;
@@ -83,6 +84,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.01em;
   }
   
   #root {
@@ -92,7 +94,7 @@
   }
   
   .page-container {
-    @apply flex-1 overflow-y-auto pb-20 pt-0 px-4;
+    @apply flex-1 overflow-y-auto pb-20 pt-0 px-4 transition-colors duration-300;
   }
   
   .page-header {
@@ -103,7 +105,9 @@
     position: relative;
     margin-top: -16px;
     height: 180px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 1.5rem 1.5rem;
+    overflow: hidden;
     transition: all 0.5s ease;
   }
   
@@ -118,12 +122,12 @@
   }
   
   .card-shadow {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    @apply shadow-sm dark:shadow-none dark:border dark:border-gray-800;
   }
   
   .wellness-card {
-    @apply flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 dark:text-white mb-3 animate-scale-in transition-all duration-300;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    @apply flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 dark:text-white mb-3 animate-scale-in transition-all duration-300 hover:translate-y-[-2px] active:translate-y-[1px];
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.03);
   }
   
   .wellness-card:active {
@@ -131,7 +135,7 @@
   }
   
   .dark .wellness-card {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   .mood-emoji {
@@ -151,7 +155,7 @@
   }
   
   .tab-button.active {
-    @apply text-icon-purple dark:text-purple-400;
+    @apply text-icon-purple dark:text-icon-purple-light;
   }
   
   /* Animation enhancements */
@@ -181,5 +185,21 @@
   
   .pulse-glow {
     animation: pulseGlow 2s infinite;
+  }
+  
+  /* Dark mode toggle */
+  .theme-toggle {
+    @apply p-2 rounded-full transition-colors;
+  }
+  
+  /* Card enhancements */
+  .stat-card {
+    @apply rounded-xl shadow-sm dark:shadow-none dark:border dark:border-gray-800 transition-all duration-300 hover:translate-y-[-2px];
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  
+  /* Glass morphism effect */
+  .glass-card {
+    @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm;
   }
 }
