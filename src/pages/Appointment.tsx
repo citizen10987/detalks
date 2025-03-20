@@ -135,18 +135,27 @@ const Appointment = () => {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="video" className="w-full" onValueChange={(value) => setAppointmentType(value as any)}>
-            <TabsList className="grid grid-cols-3 w-full bg-gray-100 dark:bg-gray-800">
-              <TabsTrigger value="video" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-                <Video size={16} className="mb-1" />
-                <span className="text-xs">Video</span>
+            <TabsList className="grid grid-cols-3 w-full h-auto p-1 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <TabsTrigger 
+                value="video" 
+                className="flex items-center justify-center gap-2 h-12 py-3 rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm transition-all"
+              >
+                <Video size={18} className="text-icon-purple dark:text-icon-purple-light" />
+                <span>Video</span>
               </TabsTrigger>
-              <TabsTrigger value="phone" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-                <Phone size={16} className="mb-1" />
-                <span className="text-xs">Phone</span>
+              <TabsTrigger 
+                value="phone" 
+                className="flex items-center justify-center gap-2 h-12 py-3 rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm transition-all"
+              >
+                <Phone size={18} className="text-icon-purple dark:text-icon-purple-light" />
+                <span>Phone</span>
               </TabsTrigger>
-              <TabsTrigger value="in-person" className="flex flex-col h-auto py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">
-                <MapPin size={16} className="mb-1" />
-                <span className="text-xs">In-person</span>
+              <TabsTrigger 
+                value="in-person" 
+                className="flex items-center justify-center gap-2 h-12 py-3 rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm transition-all"
+              >
+                <MapPin size={18} className="text-icon-purple dark:text-icon-purple-light" />
+                <span>In-person</span>
               </TabsTrigger>
             </TabsList>
           </Tabs>

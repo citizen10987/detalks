@@ -50,18 +50,21 @@ const Professional = () => {
         <WellnessCard
           icon={UserCircle}
           title="Therapist Directory"
+          description="Find specialized therapists in your area"
           backgroundColor="bg-mood-purple dark:bg-indigo-900/60"
           to="/therapists"
         />
         <WellnessCard
           icon={Calendar}
           title="Book Appointment"
+          description="Schedule your next therapy session"
           backgroundColor="bg-mood-peach dark:bg-amber-900/60"
           to="/appointment"
         />
         <WellnessCard
           icon={MessageSquare}
           title="Secure Chat"
+          description="Private messaging with your therapist"
           backgroundColor="bg-mood-green dark:bg-green-900/60"
           badge="Private"
           to="/secure-chat"
@@ -69,6 +72,7 @@ const Professional = () => {
         <WellnessCard
           icon={BookOpen}
           title="Mental Health Resources"
+          description="Articles, guides, and support materials"
           backgroundColor="bg-mood-blue dark:bg-blue-900/60"
           to="/resources"
         />
