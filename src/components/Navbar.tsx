@@ -32,10 +32,11 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-2 px-4 z-10 backdrop-blur-sm bg-white/90 dark:bg-gray-900/90">
+    <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-2 px-4 z-10 backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 transition-colors duration-300">
       <div className="flex justify-between items-center max-w-md mx-auto">
         {tabs.map((tab) => {
-          const isActive = pathname === tab.path;
+          const isActive = pathname === tab.path || 
+                           (tab.path !== '/' && pathname.startsWith(tab.path));
           const Icon = tab.icon;
           
           return (
@@ -43,8 +44,10 @@ const Navbar = () => {
               key={tab.path} 
               to={tab.path} 
               className={cn(
-                "tab-button flex flex-col items-center p-1 rounded-lg transition-all", 
-                isActive ? "active" : "hover:bg-gray-50 dark:hover:bg-gray-800"
+                "tab-button flex flex-col items-center p-2 rounded-lg transition-all", 
+                isActive 
+                  ? "active bg-gray-50 dark:bg-gray-800" 
+                  : "hover:bg-gray-50 dark:hover:bg-gray-800"
               )}
             >
               <Icon 
