@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Search, Star, MapPin, Users, Clock, Filter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, Search, Star, MapPin, Users, Clock, Filter, ShieldCheck } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface Therapist {
   id: number;
@@ -16,11 +17,13 @@ interface Therapist {
   image?: string;
   availability: string;
   patients: number;
+  verified?: boolean;
 }
 
 const Therapists = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
+  const navigate = useNavigate();
   
   const therapists: Therapist[] = [
     { 
@@ -30,7 +33,8 @@ const Therapists = () => {
       rating: 4.8, 
       location: 'San Francisco',
       availability: 'Next available: Tomorrow',
-      patients: 120
+      patients: 120,
+      verified: true
     },
     { 
       id: 2, 
@@ -39,7 +43,8 @@ const Therapists = () => {
       rating: 4.7, 
       location: 'New York',
       availability: 'Next available: Wednesday',
-      patients: 98
+      patients: 98,
+      verified: true
     },
     { 
       id: 3, 
@@ -48,7 +53,8 @@ const Therapists = () => {
       rating: 4.9, 
       location: 'Chicago',
       availability: 'Next available: Today',
-      patients: 145
+      patients: 145,
+      verified: true
     },
     { 
       id: 4, 
@@ -92,9 +98,12 @@ const Therapists = () => {
   return (
     <div className="page-container">
       <div className="flex items-center mb-6 mt-4">
-        <Link to="/" className="mr-4 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full transition-colors">
+        <button 
+          className="mr-4 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full transition-colors"
+          onClick={() => navigate(-1)}
+        >
           <ArrowLeft size={20} className="text-gray-600 dark:text-gray-400" />
-        </Link>
+        </button>
         <h1 className="text-2xl font-semibold">Find a Therapist</h1>
       </div>
       
@@ -104,7 +113,7 @@ const Therapists = () => {
           <Input 
             type="text" 
             placeholder="Search by name or specialty" 
-            className="pl-10 pr-4 py-2"
+            className="pl-10 pr-4 py-2 bg-white dark:bg-gray-800"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -112,7 +121,7 @@ const Therapists = () => {
         
         <div className="flex gap-2">
           <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
-            <SelectTrigger className="flex-1">
+            <SelectTrigger className="flex-1 bg-white dark:bg-gray-800">
               <SelectValue placeholder="All Specialties" />
             </SelectTrigger>
             <SelectContent>
@@ -123,23 +132,35 @@ const Therapists = () => {
             </SelectContent>
           </Select>
           
-          <Button variant="outline" size="icon" className="aspect-square">
+          <Button variant="outline" size="icon" className="aspect-square bg-white dark:bg-gray-800">
             <Filter size={18} />
           </Button>
         </div>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-4 animate-fade-in">
         {filteredTherapists.length > 0 ? (
           filteredTherapists.map(therapist => (
-            <Card key={therapist.id} className="overflow-hidden hover:shadow-md transition-all hover:translate-y-[-2px]">
+            <Card key={therapist.id} className="overflow-hidden transition-all hover:shadow-md hover:translate-y-[-2px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
                 <div className="p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-medium text-lg">{therapist.name}</h3>
-                    <span className="px-2 py-1 bg-mood-purple dark:bg-gray-700 rounded-full text-xs font-medium text-icon-purple dark:text-icon-purple-light">
-                      {therapist.specialty}
-                    </span>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-icon-purple/20 dark:bg-icon-purple/40 flex items-center justify-center text-xl mr-3">
+                        {therapist.name.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="flex items-center">
+                          <h3 className="font-medium text-lg">{therapist.name}</h3>
+                          {therapist.verified && (
+                            <ShieldCheck size={16} className="ml-1 text-green-500" />
+                          )}
+                        </div>
+                        <Badge className="mt-1 bg-mood-purple text-icon-purple dark:bg-gray-700 dark:text-icon-purple-light border-0">
+                          {therapist.specialty}
+                        </Badge>
+                      </div>
+                    </div>
                   </div>
                   
                   <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-1">
@@ -166,11 +187,17 @@ const Therapists = () => {
                   </div>
                 </div>
                 
-                <div className="flex border-t border-gray-100 dark:border-gray-800">
-                  <Link to={`/appointment?therapist=${therapist.id}`} className="flex-1 py-3 text-center text-icon-purple dark:text-icon-purple-light font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <div className="flex border-t border-gray-100 dark:border-gray-700">
+                  <Link 
+                    to={`/appointment?therapist=${therapist.id}`} 
+                    className="flex-1 py-3 text-center text-icon-purple dark:text-icon-purple-light font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
                     Book Appointment
                   </Link>
-                  <Link to={`/therapists/${therapist.id}`} className="flex-1 py-3 text-center text-gray-600 dark:text-gray-400 border-l border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <Link 
+                    to={`/therapists/${therapist.id}`} 
+                    className="flex-1 py-3 text-center text-gray-600 dark:text-gray-400 border-l border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
                     View Profile
                   </Link>
                 </div>

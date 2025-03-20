@@ -1,65 +1,76 @@
 
 import React from 'react';
-import { ArrowLeft, UserCircle, Calendar, MessageSquare } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, UserCircle, Calendar, MessageSquare, Badge } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
 
 const Professional = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="page-container">
       <div className="page-header">
         <div className="flex items-center">
-          <Link to="/" className="mr-4">
+          <button
+            className="mr-4 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full transition-colors"
+            onClick={() => navigate('/')}
+          >
             <ArrowLeft size={20} className="text-gray-600 dark:text-gray-400" />
-          </Link>
+          </button>
           <div>
             <h1 className="text-2xl font-semibold">Professional Support</h1>
             <p className="text-gray-600 dark:text-gray-400">Connect with licensed experts</p>
           </div>
         </div>
         <Link to="/profile">
-          <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-            <UserCircle className="text-gray-500 dark:text-gray-400" size={20} />
+          <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <UserCircle className="text-gray-600 dark:text-gray-400" size={22} />
           </div>
         </Link>
       </div>
       
       <MoodSelector />
       
-      <div className="flex mb-6 space-x-4">
+      <div className="flex mb-6 space-x-4 animate-fade-in">
         <Link
           to="/"
-          className="flex-1 py-3 px-4 rounded-xl transition-all bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 text-center"
+          className="flex-1 py-3 px-4 rounded-xl transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-300 text-center border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           Self-Guided
         </Link>
         <button
-          className="flex-1 py-3 px-4 rounded-xl transition-all bg-black dark:bg-gray-700 text-white"
+          className="flex-1 py-3 px-4 rounded-xl transition-all bg-icon-purple dark:bg-icon-purple-light text-white dark:text-gray-900"
         >
           Professional
         </button>
       </div>
       
-      <div className="space-y-3 animate-fade-in">
+      <div className="space-y-4 animate-fade-in">
         <WellnessCard
           icon={UserCircle}
           title="Therapist Directory"
-          backgroundColor="bg-mood-purple"
+          backgroundColor="bg-mood-purple dark:bg-indigo-900/60"
           to="/therapists"
         />
         <WellnessCard
           icon={Calendar}
           title="Book Appointment"
-          backgroundColor="bg-mood-peach"
+          backgroundColor="bg-mood-peach dark:bg-amber-900/60"
           to="/appointment"
         />
         <WellnessCard
           icon={MessageSquare}
           title="Secure Chat"
-          backgroundColor="bg-mood-green"
+          backgroundColor="bg-mood-green dark:bg-green-900/60"
           badge="Private"
           to="/secure-chat"
+        />
+        <WellnessCard
+          icon={Badge}
+          title="Mental Health Resources"
+          backgroundColor="bg-mood-blue dark:bg-blue-900/60"
+          to="/resources"
         />
       </div>
     </div>
