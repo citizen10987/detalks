@@ -1,16 +1,38 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
   Calendar, TreeDeciduous
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
+import MoodSlider from '@/components/MoodSlider';
 import WellnessCard from '@/components/WellnessCard';
+import { saveMoodEntry, getTodaysMoodEntry } from '@/utils/moodStorage';
+import { toast } from 'sonner';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
+  const [showTraditionalMood, setShowTraditionalMood] = useState(false);
+  const [todayMood, setTodayMood] = useState<{value: number, comment: string} | null>(null);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check if we have today's mood entry
+    const entry = getTodaysMoodEntry();
+    if (entry) {
+      setTodayMood({
+        value: entry.value,
+        comment: entry.comment
+      });
+    }
+  }, []);
+  
+  const handleMoodSave = (value: number, label: string, comment: string) => {
+    saveMoodEntry(value, label, comment);
+    toast.success("Mood saved successfully!");
+    setTodayMood({ value, comment });
+  };
   
   return (
     <div className="page-container">
@@ -34,7 +56,17 @@ const Home = () => {
         </Link>
       </div>
       
-      <MoodSelector />
+      {showTraditionalMood ? (
+        <MoodSelector />
+      ) : (
+        <div className="mb-6">
+          <MoodSlider 
+            onSave={handleMoodSave} 
+            initialValue={todayMood?.value || 75}
+            initialComment={todayMood?.comment || ''}
+          />
+        </div>
+      )}
       
       <div className="flex mb-6 space-x-4">
         <button
