@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -73,6 +74,13 @@ export default {
         "icon-purple": "#8362F2",
         "icon-purple-light": "#A992F9",
         "soft-gray": "#F1F0FB",
+        
+        // Mood colors
+        "mood-rad": "#10b981", // emerald-500
+        "mood-good": "#22c55e", // green-500
+        "mood-meh": "#facc15", // yellow-400
+        "mood-bad": "#f87171", // red-400
+        "mood-awful": "#dc2626", // red-600
       },
       borderRadius: {
         lg: "var(--radius)",
