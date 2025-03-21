@@ -44,8 +44,8 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
   };
 
   return (
-    <div className="bg-gray-900/80 p-5 rounded-xl backdrop-blur-sm border border-gray-800">
-      <h2 className="text-lg font-medium mb-4 text-gray-200">How's it going?</h2>
+    <div className="bg-white dark:bg-gray-900/95 p-5 rounded-xl backdrop-blur-sm border border-gray-200 dark:border-gray-800 shadow-sm">
+      <h2 className="text-lg font-medium mb-4 text-gray-800 dark:text-gray-200">How's it going?</h2>
       
       <div className="flex justify-between mb-6 animate-fade-in">
         {moods.map(mood => (
@@ -55,20 +55,20 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
                 "w-12 h-12 rounded-full flex items-center justify-center",
                 mood.color,
                 selectedMood === mood.type && "ring-2 ring-white ring-offset-2 ring-offset-gray-900",
-                "transition-all duration-200"
+                "transition-all duration-200 hover:scale-110 active:scale-95"
               )}
               onClick={() => handleMoodSelect(mood.type)}
             >
               <span className="text-xl">{mood.emoji}</span>
             </button>
-            <span className="text-xs text-gray-300">{mood.label}</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">{mood.label}</span>
           </div>
         ))}
       </div>
       
       <Textarea
         placeholder="Write about your feelings..."
-        className="bg-white/10 border-gray-700 text-gray-200 placeholder:text-gray-400 mt-4 rounded-full px-4"
+        className="bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 placeholder:text-gray-400 mt-4 rounded-xl px-4 min-h-[100px] resize-none focus:ring-2 focus:ring-icon-purple focus:border-transparent"
         value={note}
         onChange={handleNoteChange}
       />
