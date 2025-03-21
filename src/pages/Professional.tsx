@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, UserCircle, Calendar, MessageSquare, BookOpen, FileText, Globe, GraduationCap } from 'lucide-react';
+import { ArrowLeft, UserCircle, Calendar, MessageSquare, BookOpen, FileText } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
@@ -46,66 +46,35 @@ const Professional = () => {
         </button>
       </div>
       
-      <div className="grid grid-cols-2 gap-3 mb-4 animate-fade-in">
+      <div className="grid grid-cols-2 gap-3 mb-6 animate-fade-in">
         <WellnessCard
           icon={UserCircle}
           title="Therapists"
-          backgroundColor="bg-soft-green dark:bg-green-900/40"
+          backgroundColor="bg-soft-purple dark:bg-indigo-900/60"
           to="/therapists"
-          value="45"
-          unit="Near you"
         />
         <WellnessCard
           icon={Calendar}
           title="Appointments"
-          backgroundColor="bg-soft-yellow dark:bg-yellow-900/40"
+          backgroundColor="bg-soft-peach dark:bg-amber-900/60"
           to="/appointment"
-          value="2"
-          unit="Upcoming"
         />
-      </div>
-      
-      <div className="space-y-3 mt-6 animate-fade-in">
-        <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">Support Options</h3>
-        
         <WellnessCard
           icon={MessageSquare}
           title="Secure Chat"
-          description="Private messaging with your therapist"
-          backgroundColor="bg-mood-green dark:bg-green-900/60"
-          badge="Private"
+          backgroundColor="bg-soft-green dark:bg-green-900/60"
           to="/secure-chat"
         />
-        
         <WellnessCard
           icon={FileText}
           title="Assessment"
-          description="Complete mental health questionnaires"
-          backgroundColor="bg-mood-peach dark:bg-amber-900/60"
+          backgroundColor="bg-soft-yellow dark:bg-yellow-900/60"
           to="/resources"
         />
-        
         <WellnessCard
           icon={BookOpen}
           title="Resources"
-          description="Articles, guides, and support materials"
-          backgroundColor="bg-mood-blue dark:bg-blue-900/60"
-          to="/resources"
-        />
-        
-        <WellnessCard
-          icon={Globe}
-          title="Community Support"
-          description="Connect with support groups"
-          backgroundColor="bg-mood-pink dark:bg-pink-900/60"
-          to="/resources"
-        />
-        
-        <WellnessCard
-          icon={GraduationCap}
-          title="Educational Modules"
-          description="Learn about mental health topics"
-          backgroundColor="bg-mood-purple dark:bg-indigo-900/60"
+          backgroundColor="bg-soft-blue dark:bg-blue-900/60"
           to="/resources"
         />
       </div>

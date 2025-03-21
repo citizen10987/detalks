@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
-  Calendar, TreeDeciduous, Activity, Flame, Bed, Weight
+  Calendar, TreeDeciduous
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
@@ -60,106 +60,69 @@ const Home = () => {
       </div>
       
       {activeTab === 'self-guided' ? (
-        <>
-          <div className="grid grid-cols-2 gap-3 mb-4 animate-fade-in">
-            <WellnessCard
-              icon={Heart}
-              title="Heart Rate"
-              backgroundColor="bg-soft-green dark:bg-green-900/40"
-              to="/stats"
-              value="72"
-              unit="bpm"
-            />
-            <WellnessCard
-              icon={Flame}
-              title="Calories"
-              backgroundColor="bg-soft-yellow dark:bg-yellow-900/40"
-              to="/stats"
-              value="200"
-              unit="kcal"
-            />
-            <WellnessCard
-              icon={Bed}
-              title="Sleep"
-              backgroundColor="bg-soft-pink dark:bg-pink-900/40"
-              to="/stats"
-              value="8h 20m"
-              unit="Last night"
-            />
-            <WellnessCard
-              icon={Weight}
-              title="Weight"
-              backgroundColor="bg-soft-blue dark:bg-blue-900/40"
-              to="/stats"
-              value="80"
-              unit="kg"
-            />
-          </div>
-          
-          <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 my-3">Wellness Activities</h3>
-          
-          <div className="space-y-3 animate-fade-in">
-            <WellnessCard
-              icon={Moon}
-              title="Track Your Mood"
-              backgroundColor="bg-mood-purple"
-              badge="Daily"
-              to="/mood"
-            />
-            <WellnessCard
-              icon={TreeDeciduous}
-              title="Habit Tracker"
-              backgroundColor="bg-mood-green"
-              badge="Plant Trees"
-              to="/habits"
-            />
-            <WellnessCard
-              icon={Cloud}
-              title="Calming Room"
-              backgroundColor="bg-mood-peach"
-              to="/calming-room"
-            />
-            <WellnessCard
-              icon={BookOpen}
-              title="Journal Entry"
-              backgroundColor="bg-mood-green"
-              badge="New"
-              to="/journal"
-            />
-            <WellnessCard
-              icon={MessageSquare}
-              title="Talk to AI"
-              backgroundColor="bg-mood-pink"
-              to="/ai-chat"
-            />
-            <WellnessCard
-              icon={Wind}
-              title="Breathing Exercise"
-              backgroundColor="bg-mood-peach"
-              to="/breathing"
-            />
-          </div>
-        </>
+        <div className="grid grid-cols-2 gap-3 animate-fade-in">
+          <WellnessCard
+            icon={Moon}
+            title="Track Mood"
+            backgroundColor="bg-soft-purple dark:bg-indigo-900/60"
+            to="/mood"
+          />
+          <WellnessCard
+            icon={TreeDeciduous}
+            title="Habits"
+            backgroundColor="bg-soft-green dark:bg-green-900/60"
+            to="/habits"
+          />
+          <WellnessCard
+            icon={Cloud}
+            title="Calming Room"
+            backgroundColor="bg-soft-peach dark:bg-amber-900/60"
+            to="/calming-room"
+          />
+          <WellnessCard
+            icon={BookOpen}
+            title="Journal"
+            backgroundColor="bg-soft-blue dark:bg-blue-900/60"
+            to="/journal"
+          />
+          <WellnessCard
+            icon={MessageSquare}
+            title="AI Chat"
+            backgroundColor="bg-soft-pink dark:bg-pink-900/60"
+            to="/ai-chat"
+          />
+          <WellnessCard
+            icon={Wind}
+            title="Breathing"
+            backgroundColor="bg-soft-yellow dark:bg-yellow-900/60"
+            to="/breathing"
+          />
+        </div>
       ) : (
-        <div className="space-y-3 animate-fade-in">
+        <div className="grid grid-cols-2 gap-3 animate-fade-in">
           <WellnessCard
             icon={UserCircle}
-            title="Therapist Directory"
-            backgroundColor="bg-mood-purple"
+            title="Therapists"
+            backgroundColor="bg-soft-purple dark:bg-indigo-900/60"
             to="/therapists"
           />
           <WellnessCard
             icon={Calendar}
-            title="Book Appointment"
-            backgroundColor="bg-mood-peach"
+            title="Appointments"
+            backgroundColor="bg-soft-peach dark:bg-amber-900/60"
             to="/appointment"
           />
           <WellnessCard
             icon={MessageSquare}
             title="Secure Chat"
-            backgroundColor="bg-mood-green"
-            badge="Private"
+            backgroundColor="bg-soft-green dark:bg-green-900/60"
             to="/secure-chat"
+          />
+          <WellnessCard
+            icon={BookOpen}
+            title="Resources"
+            backgroundColor="bg-soft-blue dark:bg-blue-900/60"
+            to="/resources"
           />
         </div>
       )}
