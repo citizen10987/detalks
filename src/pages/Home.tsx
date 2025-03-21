@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, Calendar, TreeDeciduous 
+  Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
+  Calendar, TreeDeciduous, Activity, Flame, Bed, Weight
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import WellnessCard from '@/components/WellnessCard';
@@ -59,47 +60,86 @@ const Home = () => {
       </div>
       
       {activeTab === 'self-guided' ? (
-        <div className="space-y-3 animate-fade-in">
-          <WellnessCard
-            icon={Moon}
-            title="Track Your Mood"
-            backgroundColor="bg-mood-purple"
-            badge="Daily"
-            to="/mood"
-          />
-          <WellnessCard
-            icon={TreeDeciduous}
-            title="Habit Tracker"
-            backgroundColor="bg-mood-green"
-            badge="Plant Trees"
-            to="/habits"
-          />
-          <WellnessCard
-            icon={Cloud}
-            title="Calming Room"
-            backgroundColor="bg-mood-peach"
-            to="/calming-room"
-          />
-          <WellnessCard
-            icon={BookOpen}
-            title="Journal Entry"
-            backgroundColor="bg-mood-green"
-            badge="New"
-            to="/journal"
-          />
-          <WellnessCard
-            icon={MessageSquare}
-            title="Talk to AI"
-            backgroundColor="bg-mood-pink"
-            to="/ai-chat"
-          />
-          <WellnessCard
-            icon={Wind}
-            title="Breathing Exercise"
-            backgroundColor="bg-mood-peach"
-            to="/breathing"
-          />
-        </div>
+        <>
+          <div className="grid grid-cols-2 gap-3 mb-4 animate-fade-in">
+            <WellnessCard
+              icon={Heart}
+              title="Heart Rate"
+              backgroundColor="bg-soft-green dark:bg-green-900/40"
+              to="/stats"
+              value="72"
+              unit="bpm"
+            />
+            <WellnessCard
+              icon={Flame}
+              title="Calories"
+              backgroundColor="bg-soft-yellow dark:bg-yellow-900/40"
+              to="/stats"
+              value="200"
+              unit="kcal"
+            />
+            <WellnessCard
+              icon={Bed}
+              title="Sleep"
+              backgroundColor="bg-soft-pink dark:bg-pink-900/40"
+              to="/stats"
+              value="8h 20m"
+              unit="Last night"
+            />
+            <WellnessCard
+              icon={Weight}
+              title="Weight"
+              backgroundColor="bg-soft-blue dark:bg-blue-900/40"
+              to="/stats"
+              value="80"
+              unit="kg"
+            />
+          </div>
+          
+          <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 my-3">Wellness Activities</h3>
+          
+          <div className="space-y-3 animate-fade-in">
+            <WellnessCard
+              icon={Moon}
+              title="Track Your Mood"
+              backgroundColor="bg-mood-purple"
+              badge="Daily"
+              to="/mood"
+            />
+            <WellnessCard
+              icon={TreeDeciduous}
+              title="Habit Tracker"
+              backgroundColor="bg-mood-green"
+              badge="Plant Trees"
+              to="/habits"
+            />
+            <WellnessCard
+              icon={Cloud}
+              title="Calming Room"
+              backgroundColor="bg-mood-peach"
+              to="/calming-room"
+            />
+            <WellnessCard
+              icon={BookOpen}
+              title="Journal Entry"
+              backgroundColor="bg-mood-green"
+              badge="New"
+              to="/journal"
+            />
+            <WellnessCard
+              icon={MessageSquare}
+              title="Talk to AI"
+              backgroundColor="bg-mood-pink"
+              to="/ai-chat"
+            />
+            <WellnessCard
+              icon={Wind}
+              title="Breathing Exercise"
+              backgroundColor="bg-mood-peach"
+              to="/breathing"
+            />
+          </div>
+        </>
       ) : (
         <div className="space-y-3 animate-fade-in">
           <WellnessCard

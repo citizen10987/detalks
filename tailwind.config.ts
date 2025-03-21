@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -74,6 +73,14 @@ export default {
         "icon-purple": "#8362F2",
         "icon-purple-light": "#A992F9",
         "soft-gray": "#F1F0FB",
+        
+        // New soft colors for minimalist tiles
+        "soft-green": "#D3F2E4",  // Soft mint green
+        "soft-yellow": "#FEF7CD", // Soft yellow
+        "soft-pink": "#FFE5EC",   // Soft pink
+        "soft-blue": "#D3E4FD",   // Soft blue
+        "soft-purple": "#EDE4FF", // Soft purple
+        "soft-peach": "#FFE8D6",  // Soft peach
         
         // Mood colors
         "mood-rad": "#10b981", // emerald-500
