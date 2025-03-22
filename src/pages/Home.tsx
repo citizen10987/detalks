@@ -3,14 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
-  Calendar, TreeDeciduous, Bell
+  Calendar, TreeDeciduous, Bell, HandWaving, DollarSign, User
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import MoodSlider from '@/components/MoodSlider';
 import WellnessCard from '@/components/WellnessCard';
 import { saveMoodEntry, getTodaysMoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
-import { EmotionSelector } from '@/components/EmotionSelector';
+import EmotionSelector from '@/components/EmotionSelector';
+import { format } from 'date-fns';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
@@ -18,6 +21,8 @@ const Home = () => {
   const [todayMood, setTodayMood] = useState<{value: number, comment: string, emotions?: string[]} | null>(null);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const navigate = useNavigate();
+  const today = format(new Date(), 'MMM dd, yyyy');
+  const notificationCount = 3; // This would be dynamic in a real app
   
   useEffect(() => {
     // Check if we have today's mood entry
@@ -51,19 +56,46 @@ const Home = () => {
         />
       </div>
       
-      <div className="greeting-container bg-gray-400/20 dark:bg-gray-700/30 backdrop-blur-sm rounded-xl p-5 mb-6 relative overflow-hidden">
-        <div className="absolute top-3 right-3">
-          <Bell size={20} className="text-white/70" />
-        </div>
-        <div className="flex items-center space-x-4 mb-2">
-          <div className="w-12 h-12 rounded-full bg-soft-blue/70 flex items-center justify-center">
-            <UserCircle className="text-white" size={30} />
+      <div className="greeting-container bg-amber-800/75 dark:bg-amber-900/80 backdrop-blur-sm rounded-xl p-4 mb-6 relative overflow-hidden">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <Avatar className="h-10 w-10 border-2 border-white/20">
+              <AvatarImage src="/lovable-uploads/448d1ab0-b87d-4c56-90e0-24e6d43c78aa.png" alt="Profile" />
+              <AvatarFallback>
+                <User className="text-white" size={20} />
+              </AvatarFallback>
+            </Avatar>
+            <span className="text-white/90 text-sm font-medium">{today}</span>
           </div>
-          <div className="text-white/90">
-            <p className="text-sm font-medium">Hello, Sarah</p>
+          <div className="relative">
+            <Bell size={20} className="text-white/80" />
+            {notificationCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                {notificationCount}
+              </span>
+            )}
           </div>
         </div>
-        <h2 className="text-2xl font-bold text-white mt-3">how are you today?</h2>
+        
+        <div className="flex items-center mt-2 gap-3">
+          <div className="w-12 h-12 rounded-full bg-amber-700/80 flex items-center justify-center text-lg font-bold text-white">
+            {todayMood?.value || 88}
+          </div>
+          <div className="text-white">
+            <div className="flex items-center gap-1">
+              <span className="text-lg font-medium">Hello, Shinomiya!</span>
+              <span className="text-yellow-300">👋</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs mt-1">
+              <Badge variant="outline" className="bg-white/10 text-white border-none px-2 py-0.5 flex items-center gap-1">
+                <span className="text-amber-300">⚕</span> Anxious
+              </Badge>
+              <Badge variant="outline" className="bg-white/10 text-white border-none px-2 py-0.5 flex items-center gap-1">
+                <DollarSign className="w-3 h-3 text-amber-300" /> plus Member
+              </Badge>
+            </div>
+          </div>
+        </div>
       </div>
       
       {showTraditionalMood ? (
