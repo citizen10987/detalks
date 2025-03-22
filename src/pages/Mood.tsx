@@ -6,12 +6,14 @@ import MoodSlider from '@/components/MoodSlider';
 import MoodCalendar from '@/components/MoodCalendar';
 import { saveMoodEntry, getMoodEntries, getTodaysMoodEntry, MoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
+import EmotionSelector from '@/components/EmotionSelector';
 
 const Mood = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [moodEntries, setMoodEntries] = useState<MoodEntry[]>([]);
   const [todayMood, setTodayMood] = useState<{value: number, comment: string} | null>(null);
+  const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   
   useEffect(() => {
     // Load all mood entries
@@ -25,11 +27,16 @@ const Mood = () => {
         value: entry.value,
         comment: entry.comment
       });
+      
+      // Load emotions if they exist
+      if (entry.emotions) {
+        setSelectedEmotions(entry.emotions);
+      }
     }
   }, []);
   
   const handleMoodSave = (value: number, label: string, comment: string) => {
-    const entry = saveMoodEntry(value, label, comment);
+    const entry = saveMoodEntry(value, label, comment, selectedEmotions);
     toast.success("Mood saved successfully!");
     setTodayMood({ value, comment });
     
@@ -39,8 +46,29 @@ const Mood = () => {
     ), entry]);
   };
   
+  const handleEmotionSelect = (emotions: string[]) => {
+    setSelectedEmotions(emotions);
+    
+    // If we already have a mood entry today, update it with the new emotions
+    if (todayMood) {
+      const entry = saveMoodEntry(
+        todayMood.value, 
+        valuesToMoodType(todayMood.value), 
+        todayMood.comment,
+        emotions
+      );
+      
+      // Update the entries list
+      setMoodEntries([...moodEntries.filter(e => 
+        new Date(e.date).toDateString() !== new Date().toDateString()
+      ), entry]);
+      
+      toast.success("Emotions updated!");
+    }
+  };
+  
   // Convert mood value (0-100) to MoodType for calendar display
-  const valuesToMoodType = (value: number) => {
+  const valuesToMoodType = (value: number): 'rad' | 'good' | 'meh' | 'bad' | 'awful' => {
     if (value >= 75) return 'rad';
     if (value >= 50) return 'good';
     if (value >= 25) return 'meh';
@@ -81,6 +109,14 @@ const Mood = () => {
           onSave={handleMoodSave} 
           initialValue={todayMood?.value || 75}
           initialComment={todayMood?.comment || ''}
+        />
+      </div>
+      
+      <div className="mb-6">
+        <h2 className="text-lg font-medium mb-4">What emotions do you feel right now?</h2>
+        <EmotionSelector 
+          selectedEmotions={selectedEmotions} 
+          onChange={handleEmotionSelect}
         />
       </div>
       

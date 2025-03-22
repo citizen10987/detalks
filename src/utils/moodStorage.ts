@@ -4,16 +4,23 @@ export interface MoodEntry {
   value: number;
   label: string;
   comment: string;
+  emotions?: string[];
 }
 
 const MOOD_STORAGE_KEY = 'mood_entries';
 
-export const saveMoodEntry = (value: number, label: string, comment: string): MoodEntry => {
+export const saveMoodEntry = (
+  value: number, 
+  label: string, 
+  comment: string, 
+  emotions: string[] = []
+): MoodEntry => {
   const entry: MoodEntry = {
     date: new Date(),
     value,
     label,
-    comment
+    comment,
+    emotions
   };
   
   // Get existing entries
