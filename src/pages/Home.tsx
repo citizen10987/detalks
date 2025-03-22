@@ -1,15 +1,17 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
-  Calendar, TreeDeciduous
+  Calendar, TreeDeciduous, Bell
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import MoodSlider from '@/components/MoodSlider';
 import WellnessCard from '@/components/WellnessCard';
 import { saveMoodEntry, getTodaysMoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { format } from 'date-fns';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
@@ -36,12 +38,41 @@ const Home = () => {
   
   return (
     <div className="page-container">
-      <div className="welcome-image-container mb-6 -mx-4 overflow-hidden rounded-b-3xl">
-        <img 
-          src="/lovable-uploads/dda6774c-f893-477e-960b-4a0435b7e4f6.png" 
-          alt="Peaceful night view" 
-          className="w-full h-auto object-cover animate-fade-in" 
-        />
+      <div className="bg-amber-800/90 dark:bg-amber-900 mb-6 -mx-4 px-4 py-3 rounded-b-3xl">
+        <div className="flex justify-between items-center mb-1">
+          <div className="flex items-center gap-2">
+            <Avatar className="h-8 w-8 border border-amber-200/30">
+              <AvatarImage src="/placeholder.svg" alt="User" />
+              <AvatarFallback className="bg-amber-700">S</AvatarFallback>
+            </Avatar>
+            <span className="text-amber-100">{format(new Date(), 'MMM dd, yyyy')}</span>
+          </div>
+          <div className="relative">
+            <Bell className="text-amber-100" size={20} />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+              3
+            </span>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-4 mt-3">
+          <div className="bg-amber-700/80 w-16 h-16 rounded-full flex items-center justify-center text-amber-100 text-2xl font-bold">
+            {todayMood ? Math.round(todayMood.value) : 88}
+          </div>
+          <div>
+            <h2 className="text-amber-100 font-medium text-lg flex items-center gap-1">
+              Hello, Sarah! <span className="text-yellow-400">✨</span>
+            </h2>
+            <div className="flex gap-2 mt-1">
+              <Badge variant="outline" className="bg-amber-700/30 text-amber-200 border-amber-600/50 text-xs px-1.5">
+                ⊕ Anxious
+              </Badge>
+              <Badge variant="outline" className="bg-amber-700/30 text-amber-200 border-amber-600/50 text-xs px-1.5">
+                ◇ plus Member
+              </Badge>
+            </div>
+          </div>
+        </div>
       </div>
       
       <div className="page-header">
