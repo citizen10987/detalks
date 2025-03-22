@@ -3,18 +3,20 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
-  Calendar, TreeDeciduous
+  Calendar, TreeDeciduous, Bell
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import MoodSlider from '@/components/MoodSlider';
 import WellnessCard from '@/components/WellnessCard';
 import { saveMoodEntry, getTodaysMoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
+import { EmotionSelector } from '@/components/EmotionSelector';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
   const [showTraditionalMood, setShowTraditionalMood] = useState(false);
-  const [todayMood, setTodayMood] = useState<{value: number, comment: string} | null>(null);
+  const [todayMood, setTodayMood] = useState<{value: number, comment: string, emotions?: string[]} | null>(null);
+  const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -23,15 +25,20 @@ const Home = () => {
     if (entry) {
       setTodayMood({
         value: entry.value,
-        comment: entry.comment
+        comment: entry.comment,
+        emotions: entry.emotions
       });
+      
+      if (entry.emotions) {
+        setSelectedEmotions(entry.emotions);
+      }
     }
   }, []);
   
   const handleMoodSave = (value: number, label: string, comment: string) => {
-    saveMoodEntry(value, label, comment);
+    saveMoodEntry(value, label, comment, selectedEmotions);
     toast.success("Mood saved successfully!");
-    setTodayMood({ value, comment });
+    setTodayMood({ value, comment, emotions: selectedEmotions });
   };
   
   return (
@@ -44,16 +51,19 @@ const Home = () => {
         />
       </div>
       
-      <div className="page-header">
-        <div>
-          <h1 className="text-2xl font-semibold">Welcome back, Sarah</h1>
-          <p className="text-gray-600 dark:text-gray-400">How are you feeling today?</p>
+      <div className="greeting-container bg-gray-400/20 dark:bg-gray-700/30 backdrop-blur-sm rounded-xl p-5 mb-6 relative overflow-hidden">
+        <div className="absolute top-3 right-3">
+          <Bell size={20} className="text-white/70" />
         </div>
-        <Link to="/profile">
-          <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-            <UserCircle className="text-gray-500 dark:text-gray-400" size={20} />
+        <div className="flex items-center space-x-4 mb-2">
+          <div className="w-12 h-12 rounded-full bg-soft-blue/70 flex items-center justify-center">
+            <UserCircle className="text-white" size={30} />
           </div>
-        </Link>
+          <div className="text-white/90">
+            <p className="text-sm font-medium">Hello, Sarah</p>
+          </div>
+        </div>
+        <h2 className="text-2xl font-bold text-white mt-3">how are you today?</h2>
       </div>
       
       {showTraditionalMood ? (
@@ -65,6 +75,16 @@ const Home = () => {
             initialValue={todayMood?.value || 75}
             initialComment={todayMood?.comment || ''}
           />
+          
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Select emotions you're feeling:
+            </p>
+            <EmotionSelector 
+              selectedEmotions={selectedEmotions} 
+              onChange={setSelectedEmotions} 
+            />
+          </div>
         </div>
       )}
       
