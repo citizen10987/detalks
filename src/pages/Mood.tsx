@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, UserCircle } from 'lucide-react';
+import { ArrowLeft, UserCircle, SunMedium, CloudRain, Cloud, CloudSun, CloudLightning } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MoodSlider from '@/components/MoodSlider';
 import MoodCalendar from '@/components/MoodCalendar';
@@ -83,11 +83,11 @@ const Mood = () => {
   }));
   
   return (
-    <div className="page-container">
+    <div className="page-container bg-gradient-to-b from-brand-plum/10 to-transparent">
       <div className="page-header">
         <div className="flex items-center">
           <button
-            className="mr-4 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full transition-colors"
+            className="mr-4 hover:bg-brand-plum/20 p-2 rounded-full transition-colors"
             onClick={() => navigate('/')}
           >
             <ArrowLeft size={20} className="text-gray-600 dark:text-gray-400" />
@@ -98,8 +98,8 @@ const Mood = () => {
           </div>
         </div>
         <Link to="/profile">
-          <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-            <UserCircle className="text-gray-600 dark:text-gray-400" size={22} />
+          <div className="w-10 h-10 rounded-full bg-brand-plum/20 flex items-center justify-center hover:bg-brand-plum/30 transition-colors">
+            <UserCircle className="text-brand-plum" size={22} />
           </div>
         </Link>
       </div>

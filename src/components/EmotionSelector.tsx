@@ -37,15 +37,15 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({
           onClick={() => toggleEmotion(emotion)}
           className={`py-2 px-4 rounded-md transition-colors text-center text-sm ${
             selectedEmotions.includes(emotion)
-              ? 'bg-gray-800 text-white'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+              ? 'bg-brand-plum text-white'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           {emotion}
         </button>
       ))}
       <button
-        className="py-2 px-4 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 flex items-center justify-center"
+        className="py-2 px-4 rounded-md bg-brand-green/20 dark:bg-brand-green/10 text-brand-green border border-brand-green/30 flex items-center justify-center hover:bg-brand-green/30 transition-colors"
         onClick={() => {
           // This would open a modal to add custom emotion in a real app
           // For now, we'll just show a toast

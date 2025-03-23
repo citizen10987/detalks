@@ -63,31 +63,39 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         
-        // App specific colors - refined for a more calming palette
-        "mood-purple": "#E5DEFF",
-        "mood-peach": "#FDE1D3",
-        "mood-green": "#F0F7EA",
-        "mood-pink": "#FFDEE2",
-        "mood-blue": "#D3E4FD",
-        "wellness-orange": "#F8B75D",
-        "icon-purple": "#8362F2",
-        "icon-purple-light": "#A992F9",
+        // Custom brand palette
+        "brand-plum": "#BEB1CB",         // Plum Point
+        "brand-green": "#C8DE7A",        // Kowloon
+        "brand-yellow": "#FDBE2A",       // Extreme Yellow
+        "brand-pink": "#F9B8D3",         // Pink Quartz
+        "brand-orange": "#F14C27",       // Burning Orange
+        "brand-gold": "#AB8E25",         // Sahara
+        
+        // App specific colors remapped to our new palette
+        "mood-purple": "#BEB1CB",
+        "mood-peach": "#F9B8D3",
+        "mood-green": "#C8DE7A",
+        "mood-pink": "#F9B8D3",
+        "mood-blue": "#BEB1CB",
+        "wellness-orange": "#F14C27",
+        "icon-purple": "#BEB1CB",
+        "icon-purple-light": "#BEB1CB",
         "soft-gray": "#F1F0FB",
         
-        // New soft colors for minimalist tiles
-        "soft-green": "#D3F2E4",  // Soft mint green
-        "soft-yellow": "#FEF7CD", // Soft yellow
-        "soft-pink": "#FFE5EC",   // Soft pink
-        "soft-blue": "#D3E4FD",   // Soft blue
-        "soft-purple": "#EDE4FF", // Soft purple
-        "soft-peach": "#FFE8D6",  // Soft peach
+        // Soft colors for minimalist tiles remapped
+        "soft-green": "#C8DE7A",    // Kowloon
+        "soft-yellow": "#FDBE2A",   // Extreme Yellow
+        "soft-pink": "#F9B8D3",     // Pink Quartz
+        "soft-blue": "#BEB1CB",     // Plum Point
+        "soft-purple": "#BEB1CB",   // Plum Point
+        "soft-peach": "#F9B8D3",    // Pink Quartz
         
-        // Mood colors
-        "mood-rad": "#10b981", // emerald-500
-        "mood-good": "#22c55e", // green-500
-        "mood-meh": "#facc15", // yellow-400
-        "mood-bad": "#f87171", // red-400
-        "mood-awful": "#dc2626", // red-600
+        // Mood colors remapped
+        "mood-rad": "#C8DE7A",      // Kowloon (positive)
+        "mood-good": "#FDBE2A",     // Extreme Yellow (good)
+        "mood-meh": "#BEB1CB",      // Plum Point (neutral)
+        "mood-bad": "#F9B8D3",      // Pink Quartz (sad)
+        "mood-awful": "#F14C27",    // Burning Orange (negative)
       },
       borderRadius: {
         lg: "var(--radius)",
