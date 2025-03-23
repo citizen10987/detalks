@@ -1,13 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
-  Calendar, TreeDeciduous, Bell
+  Calendar, TreeDeciduous
 } from 'lucide-react';
 import MoodSelector from '@/components/MoodSelector';
 import MoodSlider from '@/components/MoodSlider';
 import WellnessCard from '@/components/WellnessCard';
+import CalendarModal from '@/components/CalendarModal';
 import { saveMoodEntry, getTodaysMoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -18,6 +18,7 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState<'self-guided' | 'professional'>('self-guided');
   const [showTraditionalMood, setShowTraditionalMood] = useState(false);
   const [todayMood, setTodayMood] = useState<{value: number, comment: string} | null>(null);
+  const [showCalendar, setShowCalendar] = useState(false);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -51,11 +52,11 @@ const Home = () => {
             <span className="text-amber-800 dark:text-amber-100 font-medium">{format(new Date(), 'EEEE, MMM dd')}</span>
           </div>
           <div className="relative">
-            <button className="p-2 rounded-full bg-white/20 dark:bg-white/5 backdrop-blur-sm hover:bg-white/30 transition-colors">
-              <Bell className="text-amber-800 dark:text-amber-100" size={18} />
-              <span className="absolute -top-1 -right-1 bg-red-400 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                3
-              </span>
+            <button 
+              className="p-2 rounded-full bg-white/20 dark:bg-white/5 backdrop-blur-sm hover:bg-white/30 transition-colors"
+              onClick={() => setShowCalendar(true)}
+            >
+              <Calendar className="text-amber-800 dark:text-amber-100" size={18} />
             </button>
           </div>
         </div>
@@ -194,6 +195,8 @@ const Home = () => {
           />
         </div>
       )}
+      
+      <CalendarModal isOpen={showCalendar} onClose={() => setShowCalendar(false)} />
     </div>
   );
 };

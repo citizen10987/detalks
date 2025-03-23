@@ -1,75 +1,100 @@
-
 export interface MoodEntry {
-  date: Date;
+  date: string;
   value: number;
   label: string;
   comment: string;
-  emotions?: string[];
 }
 
-const MOOD_STORAGE_KEY = 'mood_entries';
-
-export const saveMoodEntry = (
-  value: number, 
-  label: string, 
-  comment: string, 
-  emotions: string[] = []
-): MoodEntry => {
-  const entry: MoodEntry = {
-    date: new Date(),
-    value,
-    label,
-    comment,
-    emotions
-  };
-  
-  // Get existing entries
-  const existingEntries = getMoodEntries();
-  
-  // Check if we already have an entry for today
-  const today = new Date().toDateString();
-  
-  // Filter out today's entry if it exists
-  const filteredEntries = existingEntries.filter(
-    entry => new Date(entry.date).toDateString() !== today
-  );
-  
-  // Add the new entry
-  const updatedEntries = [...filteredEntries, entry];
-  
-  // Save back to storage
-  localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(updatedEntries));
-  
-  return entry;
+/**
+ * Save a mood entry for the current day
+ */
+export const saveMoodEntry = (value: number, label: string, comment: string = '') => {
+  try {
+    // Get existing entries from local storage
+    const storedEntries = localStorage.getItem('moodEntries');
+    const entries: Record<string, MoodEntry> = storedEntries ? JSON.parse(storedEntries) : {};
+    
+    // Format today's date as a string key
+    const today = new Date();
+    const dateKey = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    // Save today's entry
+    entries[dateKey] = {
+      date: dateKey,
+      value,
+      label,
+      comment
+    };
+    
+    // Save back to localStorage
+    localStorage.setItem('moodEntries', JSON.stringify(entries));
+    return true;
+  } catch (error) {
+    console.error('Error saving mood entry:', error);
+    return false;
+  }
 };
 
-export const getMoodEntries = (): MoodEntry[] => {
-  const entriesJson = localStorage.getItem(MOOD_STORAGE_KEY);
-  if (!entriesJson) return [];
-  
+/**
+ * Get today's mood entry if it exists
+ */
+export const getTodaysMoodEntry = (): MoodEntry | null => {
   try {
-    const entries = JSON.parse(entriesJson);
-    return entries.map((entry: any) => ({
-      ...entry,
-      date: new Date(entry.date)
-    }));
+    // Get existing entries from local storage
+    const storedEntries = localStorage.getItem('moodEntries');
+    if (!storedEntries) return null;
+    
+    const entries: Record<string, MoodEntry> = JSON.parse(storedEntries);
+    
+    // Format today's date as a string key
+    const today = new Date();
+    const dateKey = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    // Return today's entry if it exists
+    return entries[dateKey] || null;
   } catch (error) {
-    console.error('Error parsing mood entries:', error);
+    console.error('Error retrieving mood entry:', error);
+    return null;
+  }
+};
+
+/**
+ * Get all mood entries
+ */
+export const getAllMoodEntries = (): MoodEntry[] => {
+  try {
+    // Get existing entries from local storage
+    const storedEntries = localStorage.getItem('moodEntries');
+    if (!storedEntries) return [];
+    
+    const entries: Record<string, MoodEntry> = JSON.parse(storedEntries);
+    
+    // Convert object to array
+    return Object.values(entries);
+  } catch (error) {
+    console.error('Error retrieving all mood entries:', error);
     return [];
   }
 };
 
-export const getMoodEntryForDate = (date: Date): MoodEntry | null => {
-  const entries = getMoodEntries();
-  const dateString = date.toDateString();
-  
-  const entry = entries.find(
-    e => new Date(e.date).toDateString() === dateString
-  );
-  
-  return entry || null;
-};
-
-export const getTodaysMoodEntry = (): MoodEntry | null => {
-  return getMoodEntryForDate(new Date());
+/**
+ * Get a specific day's mood entry
+ */
+export const getMoodEntryByDate = (date: Date): MoodEntry | null => {
+  try {
+    // Get existing entries from local storage
+    const storedEntries = localStorage.getItem('moodEntries');
+    if (!storedEntries) return null;
+    
+    const entries: Record<string, MoodEntry> = JSON.parse(storedEntries);
+    
+    // Format the date as a string key
+    const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    // Return the entry for the specified date if it exists
+    return entries[dateKey] || null;
+  } catch (error) {
+    console.error('Error retrieving mood entry for date:', error);
+    return null;
+  }
 };
