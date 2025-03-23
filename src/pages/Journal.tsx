@@ -1,17 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Plus, ArrowLeft, Calendar, Image, Mic, CheckCircle, Clock } from 'lucide-react';
+import { BookOpen, Plus, ArrowLeft, Calendar, Image, Mic, Clock } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Avatar } from '@/components/ui/avatar';
 import { useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import JournalEntryCard from '@/components/JournalEntryCard';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
 
 // Simulated journal data storage
@@ -31,7 +28,7 @@ interface JournalEntry {
 }
 
 const Journal = () => {
-  const { toast } = useToast();
+  const { toast: uiToast } = useToast();
   const navigate = useNavigate();
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [newEntryTitle, setNewEntryTitle] = useState('');
@@ -53,7 +50,7 @@ const Journal = () => {
           id: '1',
           title: 'How cool is that',
           content: 'How cool it is to be where you are now. Just to enjoy the moment and live.\nThank you!',
-          date: 'yesterday',
+          date: '2023-06-15',
           time: '8:35 pm',
           color: 'bg-purple-300 dark:bg-purple-800/70'
         },
@@ -61,7 +58,7 @@ const Journal = () => {
           id: '2',
           title: 'Just my beautiful kitty',
           content: 'Just my beautiful kitty :)',
-          date: 'yesterday',
+          date: '2023-06-14',
           time: '3:12 pm',
           imageUrl: '/lovable-uploads/677f0ba2-f85f-4d9c-87a3-099e89a071d4.png',
           color: 'bg-amber-200 dark:bg-amber-800/70'
@@ -82,7 +79,7 @@ const Journal = () => {
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
-      toast({
+      uiToast({
         title: "Image Selected",
         description: "Your image has been attached to the entry",
         duration: 1500,
@@ -93,7 +90,7 @@ const Journal = () => {
   const toggleRecording = () => {
     if (isRecording) {
       setIsRecording(false);
-      toast({
+      uiToast({
         title: "Audio Recorded",
         description: "Your voice note has been attached",
         duration: 1500,
@@ -101,7 +98,7 @@ const Journal = () => {
     } else {
       // In a real app, you would request microphone access and start recording
       setIsRecording(true);
-      toast({
+      uiToast({
         title: "Recording Started",
         description: "Please speak clearly...",
         duration: 1500,
@@ -117,7 +114,7 @@ const Journal = () => {
         id: Date.now().toString(),
         title: newEntryTitle.trim() || 'Untitled Entry',
         content: newEntryContent,
-        date: format(today, 'MMMM d, yyyy'),
+        date: format(today, 'yyyy-MM-dd'),
         time: format(today, 'h:mm a'),
         imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : undefined,
         // In a real app, you would handle audio recording and storage
@@ -138,13 +135,13 @@ const Journal = () => {
       setIsRecording(false);
       setIsSheetOpen(false);
       
-      toast({
+      uiToast({
         title: "Journal Entry Saved",
         description: "Your thoughts have been recorded",
         duration: 1500,
       });
     } else {
-      toast({
+      uiToast({
         title: "Cannot Save Empty Entry",
         description: "Please add some text to your journal entry",
         variant: "destructive",
@@ -153,34 +150,63 @@ const Journal = () => {
     }
   };
 
+  // Safely format a date string for display
+  const formatDisplayDate = (dateStr: string) => {
+    try {
+      // If it's already in a user-friendly format like "yesterday", return as is
+      if (!dateStr.includes('-')) return dateStr;
+      
+      // Otherwise parse the ISO date and format it
+      return format(parseISO(dateStr), 'MMMM d, yyyy');
+    } catch (err) {
+      console.error("Date formatting error:", err);
+      return dateStr; // Return original if there's an error
+    }
+  };
+
   // Filter entries based on active tab
   const filteredEntries = activeTab === 'all' 
     ? entries 
     : entries.filter(entry => {
-        const entryDate = new Date(entry.date);
-        const today = new Date();
-        
-        if (activeTab === 'today') {
-          return format(entryDate, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
-        } else if (activeTab === 'week') {
-          const oneWeekAgo = new Date(today);
-          oneWeekAgo.setDate(today.getDate() - 7);
-          return entryDate >= oneWeekAgo;
-        } else if (activeTab === 'month') {
-          const oneMonthAgo = new Date(today);
-          oneMonthAgo.setMonth(today.getMonth() - 1);
-          return entryDate >= oneMonthAgo;
+        try {
+          let entryDate;
+          // Handle different date formats
+          if (entry.date.includes('-')) {
+            entryDate = parseISO(entry.date);
+          } else {
+            // For entries with non-standard formats like "yesterday"
+            // Just include them in all filter views
+            return true;
+          }
+          
+          const today = new Date();
+          
+          if (activeTab === 'today') {
+            return format(entryDate, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
+          } else if (activeTab === 'week') {
+            const oneWeekAgo = new Date(today);
+            oneWeekAgo.setDate(today.getDate() - 7);
+            return entryDate >= oneWeekAgo;
+          } else if (activeTab === 'month') {
+            const oneMonthAgo = new Date(today);
+            oneMonthAgo.setMonth(today.getMonth() - 1);
+            return entryDate >= oneMonthAgo;
+          }
+          return true;
+        } catch (err) {
+          console.error("Date filtering error:", err, entry);
+          return true; // Include entries with date errors in all views
         }
-        return true;
       });
 
   // Group entries by date
   const groupedEntries: Record<string, JournalEntry[]> = {};
   filteredEntries.forEach(entry => {
-    if (!groupedEntries[entry.date]) {
-      groupedEntries[entry.date] = [];
+    const displayDate = formatDisplayDate(entry.date);
+    if (!groupedEntries[displayDate]) {
+      groupedEntries[displayDate] = [];
     }
-    groupedEntries[entry.date].push(entry);
+    groupedEntries[displayDate].push(entry);
   });
 
   return (
@@ -198,7 +224,7 @@ const Journal = () => {
         <div className="flex space-x-2">
           <button 
             className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full"
-            onClick={() => toast({
+            onClick={() => uiToast({
               title: "Calendar View",
               description: "This would show a calendar of journal entries",
               duration: 1500,
@@ -260,12 +286,18 @@ const Journal = () => {
           </SheetHeader>
           
           <div className="space-y-4">
-            <Input
-              placeholder="Entry title"
-              className="font-medium text-lg border-none p-0 focus-visible:ring-0"
-              value={newEntryTitle}
-              onChange={(e) => setNewEntryTitle(e.target.value)}
-            />
+            <div className="flex items-center justify-between">
+              <Input
+                placeholder="Entry title"
+                className="font-medium text-lg border-none p-0 focus-visible:ring-0"
+                value={newEntryTitle}
+                onChange={(e) => setNewEntryTitle(e.target.value)}
+              />
+              <div className="flex items-center gap-1 text-sm text-gray-500">
+                <Clock size={14} />
+                {format(new Date(), 'h:mm a')}
+              </div>
+            </div>
             
             <div className="rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
               <Textarea 

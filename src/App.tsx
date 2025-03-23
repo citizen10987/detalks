@@ -3,10 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
-import Professional from "@/pages/Professional";
 import Stats from "@/pages/Stats";
 import Leaderboard from "@/pages/Leaderboard";
 import Journal from "@/pages/Journal";
@@ -20,6 +19,7 @@ import Therapists from "@/pages/Therapists";
 import Appointment from "@/pages/Appointment";
 import SecureChat from "@/pages/SecureChat";
 import AiChat from "@/pages/AiChat";
+import Resources from "@/pages/Resources";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +31,6 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/professional" element={<Professional />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/mood" element={<Mood />} />
           <Route path="/stats" element={<Stats />} />
@@ -44,6 +43,12 @@ const App = () => (
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/secure-chat" element={<SecureChat />} />
           <Route path="/ai-chat" element={<AiChat />} />
+          <Route path="/resources" element={<Resources />} />
+          
+          {/* Remove redirects to unused routes */}
+          <Route path="/professional" element={<Navigate to="/therapists" replace />} />
+          
+          {/* 404 page for undefined routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Navbar />
