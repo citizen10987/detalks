@@ -36,8 +36,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
       localStorage.setItem(storageKey, JSON.stringify(filteredEntries));
       
       // This would re-render in a real app with proper state management
-      toast({
-        title: "Entry Deleted",
+      toast("Entry Deleted", {
         description: "Journal entry has been removed",
         duration: 1500,
       });
@@ -65,8 +64,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem 
-                onClick={() => toast({
-                  title: "Edit Entry",
+                onClick={() => toast("Edit Entry", {
                   description: "Editing functionality would go here",
                   duration: 1500,
                 })}
@@ -74,8 +72,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem 
-                onClick={() => toast({
-                  title: "Share Entry",
+                onClick={() => toast("Share Entry", {
                   description: "Sharing functionality would go here",
                   duration: 1500,
                 })}
@@ -114,8 +111,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
           <div className="ml-auto">
             <button 
               className="bg-gray-300 dark:bg-gray-600 p-1 rounded-full"
-              onClick={() => toast({
-                title: "Play Audio",
+              onClick={() => toast("Play Audio", {
                 description: "Audio playback would go here",
                 duration: 1500,
               })}
