@@ -4,7 +4,7 @@ import { ArrowLeft, UserCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MoodSlider from '@/components/MoodSlider';
 import MoodCalendar from '@/components/MoodCalendar';
-import { saveMoodEntry, getMoodEntries, getTodaysMoodEntry, MoodEntry } from '@/utils/moodStorage';
+import { saveMoodEntry, getAllMoodEntries, getTodaysMoodEntry, MoodEntry } from '@/utils/moodStorage';
 import { toast } from 'sonner';
 import EmotionSelector from '@/components/EmotionSelector';
 
@@ -17,7 +17,7 @@ const Mood = () => {
   
   useEffect(() => {
     // Load all mood entries
-    const entries = getMoodEntries();
+    const entries = getAllMoodEntries();
     setMoodEntries(entries);
     
     // Check if we have today's mood entry

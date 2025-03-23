@@ -1,14 +1,16 @@
+
 export interface MoodEntry {
   date: string;
   value: number;
   label: string;
   comment: string;
+  emotions?: string[];
 }
 
 /**
  * Save a mood entry for the current day
  */
-export const saveMoodEntry = (value: number, label: string, comment: string = '') => {
+export const saveMoodEntry = (value: number, label: string, comment: string = '', emotions: string[] = []): MoodEntry => {
   try {
     // Get existing entries from local storage
     const storedEntries = localStorage.getItem('moodEntries');
@@ -19,19 +21,29 @@ export const saveMoodEntry = (value: number, label: string, comment: string = ''
     const dateKey = today.toISOString().split('T')[0]; // YYYY-MM-DD format
     
     // Save today's entry
-    entries[dateKey] = {
+    const entry: MoodEntry = {
       date: dateKey,
       value,
       label,
-      comment
+      comment,
+      emotions
     };
+    
+    entries[dateKey] = entry;
     
     // Save back to localStorage
     localStorage.setItem('moodEntries', JSON.stringify(entries));
-    return true;
+    return entry;
   } catch (error) {
     console.error('Error saving mood entry:', error);
-    return false;
+    // Return a default entry instead of boolean for type consistency
+    return {
+      date: new Date().toISOString().split('T')[0],
+      value,
+      label,
+      comment,
+      emotions
+    };
   }
 };
 
