@@ -1,69 +1,85 @@
-# Welcome to your Lovable project
+# DeTalks - A Journey to Find You
 
-## Project info
+## 🌿 About DeTalks
 
-**URL**: https://lovable.dev/projects/1f6470b0-af5e-4a04-baa5-01dc8b729476
+DeTalks is an AI-powered mental health platform designed to provide **self-guided mental wellness tools, professional therapy access, and gamification elements** to encourage long-term engagement and self-improvement.
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+### 🔹 **Self-Guided Support** (Free Features)
+- **Mood Tracking** – Log and visualize emotional trends.
+- **AI Chatbot** – Conversational AI for personalized self-care.
+- **Journaling** – Text and audio journaling with AI insights.
+- **Calming Room** – Relaxation space with breathing exercises and meditation.
+- **Gamification** – Habit tracking with virtual tree-planting rewards.
 
-**Use Lovable**
+### 🔹 **Professional Therapy (Premium Features)**
+- **Therapist Directory** – Browse licensed mental health professionals.
+- **Therapy Sessions** – Book video or chat-based therapy.
+- **Dream Analysis & Self-Reflection** – AI-assisted insights into subconscious thoughts.
+- **Community Support** – Join group discussions and therapist-led Q&A.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1f6470b0-af5e-4a04-baa5-01dc8b729476) and start prompting.
+### 🔹 **Gamification & Social Impact**
+- **OtterLand Progress Tracker** – Users grow virtual trees as they build habits.
+- **Leaderboard & Rewards** – Encourages consistency with achievements.
+- **Real-World Impact** – For every 30-day streak, a real tree is planted.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🛠️ Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+DeTalks is built using **modern, scalable, and performance-driven technologies**:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend:** React.js (for web), React Native (for mobile), Tailwind CSS, shadcn-ui
+- **Backend:** Node.js with Express.js
+- **Database:** Supabase (PostgreSQL), Firebase Firestore
+- **AI Integration:** Google Gemini API (AI-powered chatbot & mood insights)
+- **Authentication:** Firebase Auth, Supabase Auth
+- **Cloud Hosting & Storage:** Google Cloud, AWS S3
+- **Payments:** Stripe / Razorpay
+- **Notifications & Scheduling:** Twilio, Firebase Messaging, Google Calendar API
 
-Follow these steps:
+---
+
+## 📂 How to Run the Project Locally
+
+### 🔹 **Clone & Set Up the Repository**
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd detalks
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+This will start the project in development mode with auto-reloading enabled.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 🌐 **Live Deployment & Contributions**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project is currently deployed via [Lovable](https://lovable.dev/projects/1f6470b0-af5e-4a04-baa5-01dc8b729476). Contributions are welcome via **GitHub pull requests**.
 
-## What technologies are used for this project?
+### 🔹 **Deploying Updates**
+- Edit via **Lovable.dev** and commit changes.
+- Work locally using **your preferred IDE** and push updates.
+- Use **GitHub Codespaces** for direct cloud-based development.
 
-This project is built with .
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📢 Community & Support
 
-## How can I deploy this project?
+Join our community to contribute, share feedback, and collaborate:
+- **Discord:** [Join our community](#)  
+- **Email:** hassan0rehman@gmail.com.com  
+- **Twitter:** [@DeTalks](#)
 
-Simply open [Lovable](https://lovable.dev/projects/1f6470b0-af5e-4a04-baa5-01dc8b729476) and click on Share -> Publish.
+Let's make mental health care more **accessible, engaging, and impactful!** 💙
 
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
