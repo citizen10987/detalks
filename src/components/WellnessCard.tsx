@@ -27,10 +27,11 @@ const WellnessCard = ({
       <div className="bg-white/30 dark:bg-white/10 rounded-full p-3 mb-2">
         <Icon 
           size={24} 
-          className={iconColor ? `text-[${iconColor}]` : "text-icon-purple dark:text-icon-purple-light"} 
+          style={{ color: iconColor }} 
+          className="text-gray-800 dark:text-gray-100" 
         />
       </div>
-      <h3 className="font-medium text-center">{title}</h3>
+      <h3 className="font-medium text-center text-gray-800 dark:text-gray-100">{title}</h3>
       {description && <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>}
     </div>
   );

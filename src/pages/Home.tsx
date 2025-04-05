@@ -57,6 +57,13 @@ const Home = () => {
     resources: "#FDBE2A",    // Extreme Yellow
   };
   
+  // Handle navigation to pages - this will hide the navbar
+  const handleNavigation = (path: string) => {
+    // We don't need to modify the navbar component directly
+    // The styling will be handled in the page component
+    navigate(path);
+  };
+  
   return (
     <div className="page-container">
       <div className="bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/60 dark:to-amber-950 mb-6 -mx-4 px-4 py-5 rounded-b-[2rem] shadow-sm transition-colors duration-300">
@@ -152,42 +159,42 @@ const Home = () => {
           <WellnessCard
             icon={Moon}
             title="Track Mood"
-            backgroundColor={`bg-[${selfGuidedColors.mood}]/20 dark:bg-[${selfGuidedColors.mood}]/30`}
+            backgroundColor="bg-brand-plum/30 dark:bg-brand-plum/20"
             iconColor={selfGuidedColors.mood}
             to="/mood"
           />
           <WellnessCard
             icon={TreeDeciduous}
             title="Habits"
-            backgroundColor={`bg-[${selfGuidedColors.habits}]/20 dark:bg-[${selfGuidedColors.habits}]/30`}
+            backgroundColor="bg-brand-green/30 dark:bg-brand-green/20"
             iconColor={selfGuidedColors.habits}
             to="/habits"
           />
           <WellnessCard
             icon={Cloud}
             title="Calming Room"
-            backgroundColor={`bg-[${selfGuidedColors.calming}]/20 dark:bg-[${selfGuidedColors.calming}]/30`}
+            backgroundColor="bg-brand-pink/30 dark:bg-brand-pink/20"
             iconColor={selfGuidedColors.calming}
             to="/calming-room"
           />
           <WellnessCard
             icon={BookOpen}
             title="Journal"
-            backgroundColor={`bg-[${selfGuidedColors.journal}]/20 dark:bg-[${selfGuidedColors.journal}]/30`}
+            backgroundColor="bg-brand-yellow/30 dark:bg-brand-yellow/20" 
             iconColor={selfGuidedColors.journal}
             to="/journal"
           />
           <WellnessCard
             icon={MessageSquare}
             title="AI Chat"
-            backgroundColor={`bg-[${selfGuidedColors.aiChat}]/20 dark:bg-[${selfGuidedColors.aiChat}]/30`}
+            backgroundColor="bg-brand-orange/30 dark:bg-brand-orange/20"
             iconColor={selfGuidedColors.aiChat}
             to="/ai-chat"
           />
           <WellnessCard
             icon={Wind}
             title="Breathing"
-            backgroundColor={`bg-[${selfGuidedColors.breathing}]/20 dark:bg-[${selfGuidedColors.breathing}]/30`}
+            backgroundColor="bg-brand-gold/30 dark:bg-brand-gold/20"
             iconColor={selfGuidedColors.breathing}
             to="/breathing"
           />
@@ -197,28 +204,28 @@ const Home = () => {
           <WellnessCard
             icon={UserCircle}
             title="Therapists"
-            backgroundColor={`bg-[${professionalColors.therapists}]/20 dark:bg-[${professionalColors.therapists}]/30`}
+            backgroundColor="bg-brand-plum/30 dark:bg-brand-plum/20"
             iconColor={professionalColors.therapists}
             to="/therapists"
           />
           <WellnessCard
             icon={Calendar}
             title="Appointments"
-            backgroundColor={`bg-[${professionalColors.appointments}]/20 dark:bg-[${professionalColors.appointments}]/30`}
+            backgroundColor="bg-brand-pink/30 dark:bg-brand-pink/20"
             iconColor={professionalColors.appointments}
             to="/appointment"
           />
           <WellnessCard
             icon={MessageSquare}
             title="Secure Chat"
-            backgroundColor={`bg-[${professionalColors.secureChat}]/20 dark:bg-[${professionalColors.secureChat}]/30`}
+            backgroundColor="bg-brand-orange/30 dark:bg-brand-orange/20"
             iconColor={professionalColors.secureChat}
             to="/secure-chat"
           />
           <WellnessCard
             icon={BookOpen}
             title="Resources"
-            backgroundColor={`bg-[${professionalColors.resources}]/20 dark:bg-[${professionalColors.resources}]/30`}
+            backgroundColor="bg-brand-yellow/30 dark:bg-brand-yellow/20"
             iconColor={professionalColors.resources}
             to="/resources"
           />
