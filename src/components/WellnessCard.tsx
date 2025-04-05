@@ -1,88 +1,55 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 import { LucideIcon } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 interface WellnessCardProps {
   icon: LucideIcon;
   title: string;
   description?: string;
   backgroundColor?: string;
-  badge?: string;
-  onClick?: () => void;
-  className?: string;
   to?: string;
-  value?: string;
-  unit?: string;
+  iconColor?: string;
+  onClick?: () => void;
 }
 
-const WellnessCard: React.FC<WellnessCardProps> = ({
-  icon: Icon,
-  title,
-  description,
-  backgroundColor = 'bg-mood-purple dark:bg-indigo-900/60',
-  badge,
-  onClick,
-  className,
-  to,
-  value,
-  unit,
-}) => {
-  const navigate = useNavigate();
-  
-  const handleClick = () => {
-    if (to) {
-      navigate(to);
-    } else if (onClick) {
-      onClick();
-    }
-  };
+const WellnessCard = ({ 
+  icon: Icon, 
+  title, 
+  description, 
+  backgroundColor = "bg-soft-purple dark:bg-indigo-900/60",
+  iconColor,
+  to, 
+  onClick 
+}: WellnessCardProps) => {
+  const content = (
+    <div className={`flex flex-col items-center justify-center p-5 rounded-2xl ${backgroundColor} w-full h-full`}>
+      <div className="bg-white/30 dark:bg-white/10 rounded-full p-3 mb-2">
+        <Icon 
+          size={24} 
+          className={iconColor ? `text-[${iconColor}]` : "text-icon-purple dark:text-icon-purple-light"} 
+        />
+      </div>
+      <h3 className="font-medium text-center">{title}</h3>
+      {description && <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>}
+    </div>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} className="block rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform">
+        {content}
+      </Link>
+    );
+  }
 
   return (
-    <div
-      className={cn(
-        "wellness-card cursor-pointer transition-all duration-300 transform hover:scale-[1.02] p-5 rounded-2xl shadow-sm",
-        backgroundColor,
-        className
-      )}
-      onClick={handleClick}
+    <button 
+      onClick={onClick} 
+      className="w-full rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform"
     >
-      {value ? (
-        // Minimalist tile design with value (for metrics)
-        <div className="flex flex-col h-full">
-          <div className="mb-1 text-gray-800 dark:text-gray-200">
-            <Icon size={22} />
-          </div>
-          <div className="mt-auto">
-            <div className="text-2xl font-semibold text-gray-800 dark:text-gray-100">{value}</div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{title}</span>
-              {unit && <span className="text-xs text-gray-600 dark:text-gray-400">{unit}</span>}
-            </div>
-          </div>
-        </div>
-      ) : (
-        // Standard card for features - updated for minimalist design
-        <div className="flex flex-col items-center justify-center text-center p-1">
-          <div className="mb-2 text-gray-800 dark:text-gray-200">
-            <Icon size={24} />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-medium text-sm text-gray-800 dark:text-gray-100">{title}</span>
-            {description && (
-              <span className="text-xs text-gray-600 dark:text-gray-300 mt-1">{description}</span>
-            )}
-          </div>
-          
-          {badge && (
-            <div className="absolute top-3 right-3 text-xs font-medium bg-white/40 dark:bg-gray-700/50 px-2 py-0.5 rounded-full text-gray-700 dark:text-gray-300">
-              {badge}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+      {content}
+    </button>
   );
 };
 

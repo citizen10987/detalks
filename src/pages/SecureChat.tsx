@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send, Shield, Check, CheckCheck, Lock, Paperclip, Mic, Image, Smile } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -55,7 +54,6 @@ const SecureChat = () => {
       setMessages([...messages, newMessage]);
       setMessage('');
       
-      // Simulate message delivery status after short delays
       setTimeout(() => {
         setMessages(prev => 
           prev.map(msg => msg.id === newMessage.id ? {...msg, status: 'delivered' as const} : msg)
@@ -68,7 +66,6 @@ const SecureChat = () => {
         );
       }, 2000);
       
-      // Simulate doctor response
       setTimeout(() => {
         setMessages(prev => [
           ...prev,
@@ -149,15 +146,15 @@ const SecureChat = () => {
               </div>
             </Link>
             <div className="flex items-center">
-              <Avatar className="h-10 w-10 border-2 border-green-500">
+              <Avatar className="h-10 w-10 border-2 border-[#F14C27]">
                 <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Emily" />
                 <AvatarFallback>EJ</AvatarFallback>
               </Avatar>
               <div className="ml-3">
                 <h1 className="text-base font-semibold">Dr. Emily Johnson</h1>
                 <div className="flex items-center">
-                  <Lock size={12} className="text-green-600 mr-1" />
-                  <span className="text-xs text-green-600 font-medium">End-to-end encrypted</span>
+                  <Lock size={12} className="text-[#F14C27] mr-1" />
+                  <span className="text-xs text-[#F14C27] font-medium">End-to-end encrypted</span>
                 </div>
               </div>
             </div>
@@ -204,13 +201,13 @@ const SecureChat = () => {
                 <div 
                   className={`rounded-2xl py-2 px-3 ${
                     msg.isUser 
-                      ? 'bg-icon-purple text-white rounded-br-none' 
+                      ? 'bg-[#F14C27] text-white rounded-br-none' 
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-none'
                   }`}
                 >
                   <div className="text-sm">{msg.text}</div>
-                  {renderImageGallery(msg.images)}
-                  {renderAudioMessage(msg.audio)}
+                  {msg.images && renderImageGallery(msg.images)}
+                  {msg.audio && renderAudioMessage(msg.audio)}
                 </div>
                 <div className={`flex items-center gap-1 ${msg.isUser ? 'justify-end' : 'justify-start'} mt-1`}>
                   <span className="text-xs text-gray-500">{msg.timestamp}</span>
@@ -255,7 +252,7 @@ const SecureChat = () => {
               size="icon"
               className={`rounded-full ${
                 message.trim() 
-                  ? 'bg-icon-purple hover:bg-icon-purple/90 text-white' 
+                  ? 'bg-[#F14C27] hover:bg-[#F14C27]/90 text-white' 
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
               }`}
               onClick={sendMessage}
@@ -263,6 +260,9 @@ const SecureChat = () => {
             >
               <Send size={20} />
             </Button>
+          </div>
+          <div className="mt-2 text-center">
+            <span className="text-xs text-[#F14C27] font-medium">Secure Professional Chat</span>
           </div>
         </div>
       </div>

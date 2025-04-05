@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
@@ -36,6 +37,24 @@ const Home = () => {
     saveMoodEntry(value, label, comment);
     toast.success("Mood saved successfully!");
     setTodayMood({ value, comment });
+  };
+
+  // Define feature colors for self-guided section
+  const selfGuidedColors = {
+    mood: "#BEB1CB",      // Plum Point
+    habits: "#C8DE7A",    // Kowloon
+    calming: "#F9B8D3",   // Pink Quartz
+    journal: "#FDBE2A",   // Extreme Yellow
+    aiChat: "#F14C27",    // Burning Orange
+    breathing: "#AB8E25", // Sahara
+  };
+
+  // Define feature colors for professional section  
+  const professionalColors = {
+    therapists: "#BEB1CB",  // Plum Point
+    appointments: "#F9B8D3", // Pink Quartz
+    secureChat: "#F14C27",   // Burning Orange
+    resources: "#FDBE2A",    // Extreme Yellow
   };
   
   return (
@@ -133,37 +152,43 @@ const Home = () => {
           <WellnessCard
             icon={Moon}
             title="Track Mood"
-            backgroundColor="bg-soft-purple dark:bg-indigo-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.mood}]/20 dark:bg-[${selfGuidedColors.mood}]/30`}
+            iconColor={selfGuidedColors.mood}
             to="/mood"
           />
           <WellnessCard
             icon={TreeDeciduous}
             title="Habits"
-            backgroundColor="bg-soft-green dark:bg-green-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.habits}]/20 dark:bg-[${selfGuidedColors.habits}]/30`}
+            iconColor={selfGuidedColors.habits}
             to="/habits"
           />
           <WellnessCard
             icon={Cloud}
             title="Calming Room"
-            backgroundColor="bg-soft-peach dark:bg-amber-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.calming}]/20 dark:bg-[${selfGuidedColors.calming}]/30`}
+            iconColor={selfGuidedColors.calming}
             to="/calming-room"
           />
           <WellnessCard
             icon={BookOpen}
             title="Journal"
-            backgroundColor="bg-soft-blue dark:bg-blue-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.journal}]/20 dark:bg-[${selfGuidedColors.journal}]/30`}
+            iconColor={selfGuidedColors.journal}
             to="/journal"
           />
           <WellnessCard
             icon={MessageSquare}
             title="AI Chat"
-            backgroundColor="bg-soft-pink dark:bg-pink-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.aiChat}]/20 dark:bg-[${selfGuidedColors.aiChat}]/30`}
+            iconColor={selfGuidedColors.aiChat}
             to="/ai-chat"
           />
           <WellnessCard
             icon={Wind}
             title="Breathing"
-            backgroundColor="bg-soft-yellow dark:bg-yellow-900/60"
+            backgroundColor={`bg-[${selfGuidedColors.breathing}]/20 dark:bg-[${selfGuidedColors.breathing}]/30`}
+            iconColor={selfGuidedColors.breathing}
             to="/breathing"
           />
         </div>
@@ -172,25 +197,29 @@ const Home = () => {
           <WellnessCard
             icon={UserCircle}
             title="Therapists"
-            backgroundColor="bg-soft-purple dark:bg-indigo-900/60"
+            backgroundColor={`bg-[${professionalColors.therapists}]/20 dark:bg-[${professionalColors.therapists}]/30`}
+            iconColor={professionalColors.therapists}
             to="/therapists"
           />
           <WellnessCard
             icon={Calendar}
             title="Appointments"
-            backgroundColor="bg-soft-peach dark:bg-amber-900/60"
+            backgroundColor={`bg-[${professionalColors.appointments}]/20 dark:bg-[${professionalColors.appointments}]/30`}
+            iconColor={professionalColors.appointments}
             to="/appointment"
           />
           <WellnessCard
             icon={MessageSquare}
             title="Secure Chat"
-            backgroundColor="bg-soft-green dark:bg-green-900/60"
+            backgroundColor={`bg-[${professionalColors.secureChat}]/20 dark:bg-[${professionalColors.secureChat}]/30`}
+            iconColor={professionalColors.secureChat}
             to="/secure-chat"
           />
           <WellnessCard
             icon={BookOpen}
             title="Resources"
-            backgroundColor="bg-soft-blue dark:bg-blue-900/60"
+            backgroundColor={`bg-[${professionalColors.resources}]/20 dark:bg-[${professionalColors.resources}]/30`}
+            iconColor={professionalColors.resources}
             to="/resources"
           />
         </div>

@@ -146,15 +146,15 @@ const AiChat = () => {
               </div>
             </Link>
             <div className="flex items-center">
-              <Avatar className="h-10 w-10 border-2 border-green-500">
+              <Avatar className="h-10 w-10 border-2 border-[#BEB1CB]">
                 <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Fadaye" />
                 <AvatarFallback>FT</AvatarFallback>
               </Avatar>
               <div className="ml-3">
                 <h1 className="text-base font-semibold">Fadaye Touse</h1>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5"></div>
-                  <span className="text-xs text-green-600 font-medium">Active</span>
+                  <div className="w-2 h-2 rounded-full bg-[#BEB1CB] mr-1.5"></div>
+                  <span className="text-xs text-[#BEB1CB] font-medium">Active</span>
                 </div>
               </div>
             </div>
@@ -202,7 +202,7 @@ const AiChat = () => {
                 <div 
                   className={`rounded-2xl py-2 px-3 ${
                     msg.isUser 
-                      ? 'bg-mood-peach text-gray-800 rounded-br-none' 
+                      ? 'bg-[#BEB1CB] text-gray-800 rounded-br-none' 
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-none'
                   }`}
                 >
@@ -279,7 +279,7 @@ const AiChat = () => {
               size="icon"
               className={`rounded-full ${
                 message.trim() 
-                  ? 'bg-icon-purple hover:bg-icon-purple/90 text-white' 
+                  ? 'bg-[#BEB1CB] hover:bg-[#BEB1CB]/90 text-white' 
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
               }`}
               onClick={sendMessage}
@@ -287,6 +287,9 @@ const AiChat = () => {
             >
               <Send size={20} />
             </Button>
+          </div>
+          <div className="mt-2 text-center">
+            <span className="text-xs text-[#BEB1CB] font-medium">AI Assistant Chat</span>
           </div>
         </div>
       </div>
