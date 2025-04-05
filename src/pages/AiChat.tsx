@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Send, Bot, Sparkles, Paperclip, Mic, Image, Smile } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, Mic, Image, Smile } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -247,45 +247,47 @@ const AiChat = () => {
         </div>
       </div>
       
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <Button size="icon" variant="ghost" className="rounded-full text-gray-500">
-              <Paperclip size={20} />
+      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div className="container max-w-4xl mx-auto p-3">
+          <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
+            <div className="flex items-center">
+              <Button size="icon" variant="ghost" className="rounded-full text-gray-500 hover:bg-transparent hover:text-gray-700 dark:hover:text-gray-300">
+                <Paperclip size={20} />
+              </Button>
+              <Button size="icon" variant="ghost" className="rounded-full text-gray-500 hover:bg-transparent hover:text-gray-700 dark:hover:text-gray-300">
+                <Image size={20} />
+              </Button>
+              <Button size="icon" variant="ghost" className="rounded-full text-gray-500 hover:bg-transparent hover:text-gray-700 dark:hover:text-gray-300">
+                <Mic size={20} />
+              </Button>
+            </div>
+            
+            <Input 
+              type="text"
+              className="flex-1 px-4 py-2 bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              placeholder="Write your message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+            />
+            
+            <Button size="icon" variant="ghost" className="rounded-full text-gray-500 hover:bg-transparent hover:text-gray-700 dark:hover:text-gray-300">
+              <Smile size={20} />
             </Button>
-            <Button size="icon" variant="ghost" className="rounded-full text-gray-500">
-              <Mic size={20} />
-            </Button>
-            <Button size="icon" variant="ghost" className="rounded-full text-gray-500">
-              <Image size={20} />
+            
+            <Button 
+              size="icon"
+              className={`rounded-full ${
+                message.trim() 
+                  ? 'bg-icon-purple hover:bg-icon-purple/90 text-white' 
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
+              }`}
+              onClick={sendMessage}
+              disabled={!message.trim()}
+            >
+              <Send size={20} />
             </Button>
           </div>
-          
-          <Input 
-            type="text"
-            className="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 border-0 rounded-full focus:ring-2 focus:ring-icon-purple"
-            placeholder="Write your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-          />
-          
-          <Button size="icon" variant="ghost" className="rounded-full text-gray-500">
-            <Smile size={20} />
-          </Button>
-          
-          <Button 
-            size="icon"
-            className={`rounded-full ${
-              message.trim() 
-                ? 'bg-icon-purple hover:bg-icon-purple/90 text-white' 
-                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-            }`}
-            onClick={sendMessage}
-            disabled={!message.trim()}
-          >
-            <Send size={20} />
-          </Button>
         </div>
       </div>
     </div>
