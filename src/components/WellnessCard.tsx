@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LucideIcon } from 'lucide-react';
 
 interface WellnessCardProps {
@@ -22,6 +22,16 @@ const WellnessCard = ({
   to, 
   onClick 
 }: WellnessCardProps) => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    if (to) {
+      navigate(to);
+    } else if (onClick) {
+      onClick();
+    }
+  };
+  
   const content = (
     <div className={`flex flex-col items-center justify-center p-5 rounded-2xl ${backgroundColor} w-full h-full`}>
       <div className="bg-white/30 dark:bg-white/10 rounded-full p-3 mb-2">
@@ -36,18 +46,11 @@ const WellnessCard = ({
     </div>
   );
 
-  if (to) {
-    return (
-      <Link to={to} className="block rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform">
-        {content}
-      </Link>
-    );
-  }
-
+  // Use button to ensure we can control navbar visibility properly
   return (
     <button 
-      onClick={onClick} 
-      className="w-full rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform"
+      onClick={handleClick} 
+      className="w-full block rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform"
     >
       {content}
     </button>

@@ -3,10 +3,17 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart, Trophy, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useNavbar } from '@/context/NavbarContext';
 
 const Navbar = () => {
   const location = useLocation();
   const pathname = location.pathname;
+  const { isNavbarVisible } = useNavbar();
+
+  // Hide navbar for feature pages
+  if (!isNavbarVisible) {
+    return null;
+  }
 
   const tabs = [
     {

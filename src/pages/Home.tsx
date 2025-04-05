@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { 
   Moon, Cloud, BookOpen, MessageSquare, Wind, Heart, UserCircle, 
   Calendar, TreeDeciduous
@@ -57,10 +56,8 @@ const Home = () => {
     resources: "#FDBE2A",    // Extreme Yellow
   };
   
-  // Handle navigation to pages - this will hide the navbar
+  // Handle navigation to pages
   const handleNavigation = (path: string) => {
-    // We don't need to modify the navbar component directly
-    // The styling will be handled in the page component
     navigate(path);
   };
   
